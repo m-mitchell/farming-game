@@ -2,23 +2,70 @@ def main():
 
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
 	while True:
-		nextAction = getUserAction()
-		print("You chose to do action %s" % nextAction)
-
+		getUserAction()
 
 
 def getUserAction():
+		# This is the main menu. 
 		options = {
-			1: ("Visit Field", "field", False),
-			2: ("Visit Barn", "barn", False),
-			3: ("Visit Village", "village", False),
-			4: ("Visit Forest", "forest", True),
-			5: ("Visit Shop", "shop", True),
-			6: ("Sleep", "sleep", True),
-			7: ("Quit", "quit", True)
+			1: ("Visit Field", "field"),
+			2: ("Visit Barn", "barn"),
+			3: ("Visit Village", "village"),
+			4: ("Visit Forest", "forest"),
+			5: ("Visit Shop", "shop"),
+			6: ("Sleep", "sleep"),
+			7: ("Quit", "quit")
 		}
-		return displayMenuPrompt(options)
+		nextAction = displayMenuPrompt(options)
 
+		# Check the user's choice and perform the appropriate action.
+		if nextAction == "field":
+			return getFieldAction()
+
+		elif nextAction == "barn":
+			return getBarnAction()
+
+		elif nextAction == "village":
+			return getVillageAction()
+
+		elif nextAction == "forest":
+			print("not implemented yet!") # TODO
+
+		elif nextAction == "shop":
+			return getShopAction()
+
+		elif nextAction == "sleep":
+			print("not implemented yet!") # TODO
+
+		elif nextAction == "quit":
+			print("Bye, see you next time!")
+			exit(0)
+
+		else:
+			return nextAction
+
+
+
+def getFieldAction():
+		print("You walk out to the field and survey the landscape:")
+		print("Plot 1 -- Empty.")
+		print("Plot 2 -- Empty.")
+		print("Plot 3 -- Empty.")
+		print("Plot 4 -- Empty.")
+
+		return "sleep"
+
+def getBarnAction():
+	print("This isn't implemented yet!")
+	return "sleep"
+
+def getVillageAction():
+	print("This isn't implemented yet!")
+	return "sleep"
+
+def getShopAction():
+	print("This isn't implemented yet!")
+	return "sleep"
 
 def displayMenuPrompt(options):
 	while True:
@@ -37,7 +84,7 @@ def displayMenuPrompt(options):
 		# Now check that the number is in the valid range.
 		choice = int(choice)
 		if choice > 0 and choice <= len(options) :
-			(optionDisplayText, optionInternalText, optionIsFinal) = options[choice]
+			(optionDisplayText, optionInternalText) = options[choice]
 			print("You picked option %d - %s\n" % (choice, optionDisplayText) )
 			return optionInternalText
 
