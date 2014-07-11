@@ -30,7 +30,7 @@ class GameTime:
 		# We'll prefix private variables with an underscore.
 		# The default time is Spring 1 Year 1, 06:00.
 		self._year = 1
-		self._season = 1
+		self._season = Season.SPRING
 		self._day = 1
 
 		self._hour = 6
@@ -72,8 +72,7 @@ class GameTime:
 			return DAY_STAGE.NIGHT
 
 	def getSeason(self):
-		# We can be lazy here, since Enum really represents numbers, and just return the season.
-		# 0=SPRING, 1=SUMMER, 2=FALL, 3=WINTER.
+		# We can be lazy here and just return the season.
 		# If we wanted to replace our season-months with actual months (1-12), we could add some more logic later.
 		return self._season
 
