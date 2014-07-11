@@ -1,4 +1,10 @@
+import models.GameTime as gt
+
 def main():
+	# Set up some 
+	# TODO remove this shiz
+	gameTime = gt.GameTime.Instance()
+	print(gameTime.getFormattedDateTime())
 
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
 	while True:
@@ -35,9 +41,11 @@ def getUserAction():
 			return getShopAction()
 
 		elif nextAction == "sleep":
-			print("not implemented yet!") # TODO
+			# The user wants to sleep. Set the clock to the next day at 6am.
+			pass
 
 		elif nextAction == "quit":
+			# The user wants to quit the game.
 			print("Bye, see you next time!")
 			exit(0)
 
