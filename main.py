@@ -1,67 +1,66 @@
 import models.GameTime as gt
 
 def main():
-	# Set up some 
-	# TODO remove this shiz
-	gameTime = gt.GameTime.Instance()
-	print(gameTime.getFormattedDateTime())
-
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
 	while True:
+		gameTime = gt.GameTime.Instance()
+		print("Today's date is " + gameTime.getFormattedDateTime())
+
 		getUserAction()
 
 
 def getUserAction():
-		# This is the main menu. 
-		options = {
-			1: ("Visit Field", "field"),
-			2: ("Visit Barn", "barn"),
-			3: ("Visit Village", "village"),
-			4: ("Visit Forest", "forest"),
-			5: ("Visit Shop", "shop"),
-			6: ("Sleep", "sleep"),
-			7: ("Quit", "quit")
-		}
-		nextAction = displayMenuPrompt(options)
+	# This is the main menu. 
+	options = {
+		1: ("Visit Field", "field"),
+		2: ("Visit Barn", "barn"),
+		3: ("Visit Village", "village"),
+		4: ("Visit Forest", "forest"),
+		5: ("Visit Shop", "shop"),
+		6: ("Sleep", "sleep"),
+		7: ("Quit", "quit")
+	}
+	nextAction = displayMenuPrompt(options)
 
-		# Check the user's choice and perform the appropriate action.
-		if nextAction == "field":
-			return getFieldAction()
+	# Check the user's choice and perform the appropriate action.
+	if nextAction == "field":
+		return getFieldAction()
 
-		elif nextAction == "barn":
-			return getBarnAction()
+	elif nextAction == "barn":
+		return getBarnAction()
 
-		elif nextAction == "village":
-			return getVillageAction()
+	elif nextAction == "village":
+		return getVillageAction()
 
-		elif nextAction == "forest":
-			print("not implemented yet!") # TODO
+	elif nextAction == "forest":
+		print("not implemented yet!") # TODO
 
-		elif nextAction == "shop":
-			return getShopAction()
+	elif nextAction == "shop":
+		return getShopAction()
 
-		elif nextAction == "sleep":
-			# The user wants to sleep. Set the clock to the next day at 6am.
-			pass
+	elif nextAction == "sleep":
+		# The user wants to sleep. Set the clock to the next day at 6am.
+		gameTime = gt.GameTime.Instance()
+		gameTime.advanceDay()
 
-		elif nextAction == "quit":
-			# The user wants to quit the game.
-			print("Bye, see you next time!")
-			exit(0)
+	elif nextAction == "quit":
+		# The user wants to quit the game.
+		print("Bye, see you next time!")
+		exit(0)
 
-		else:
-			return nextAction
+	else:
+		return nextAction
 
 
 
 def getFieldAction():
-		print("You walk out to the field and survey the landscape:")
-		print("Plot 1 -- Empty.")
-		print("Plot 2 -- Empty.")
-		print("Plot 3 -- Empty.")
-		print("Plot 4 -- Empty.")
+	print("You walk out to the field and survey the landscape:")
+	print("Plot 1 -- Empty.")
+	print("Plot 2 -- Empty.")
+	print("Plot 3 -- Empty.")
+	print("Plot 4 -- Empty.")
 
-		return "sleep"
+	return "sleep"
 
 def getBarnAction():
 	print("This isn't implemented yet!")

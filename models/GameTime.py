@@ -76,3 +76,19 @@ class GameTime:
 		# 0=SPRING, 1=SUMMER, 2=FALL, 3=WINTER.
 		# If we wanted to replace our season-months with actual months (1-12), we could add some more logic later.
 		return self._season
+
+
+	def advanceDay(self):
+		# Increment the current day by 1.
+		if self._day < 30:
+			# E.g., 17th => 18th
+			self._day += 1
+		elif self._season < Season.WINTER:
+			# E.g., Fall 30th => Winter 1st
+			self._day = 1
+			self._season += 1
+		else:
+			# E.g., Winter 30th Year 2 => Spring 1st Year 3
+			self._day = 1
+			self._season = 1
+			self._year += 1
