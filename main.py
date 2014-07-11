@@ -1,6 +1,21 @@
 import models.GameTime as gt
+import models.Plot as plot
+
+
+
+# Set up some global vars for persistence while we test.
+money = 100
+
+# Our basic field can be an array of plots.
+field = [
+	plot.Plot(),
+	plot.Plot(),
+	plot.Plot(),
+	plot.Plot()
+]
 
 def main():
+
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
 	while True:
 		gameTime = gt.GameTime.Instance()
@@ -55,10 +70,39 @@ def getUserAction():
 
 def getFieldAction():
 	print("You walk out to the field and survey the landscape:")
-	print("Plot 1 -- Empty.")
-	print("Plot 2 -- Empty.")
-	print("Plot 3 -- Empty.")
-	print("Plot 4 -- Empty.")
+	for i, plot in enumerate(field):
+		print("Plot %d -- %s" % (i, plot.getCropString()))
+
+	print("")
+
+	# Show the crop submenu
+	options = {
+		1: ("Plant Turnips", "turnip"),
+		2: ("Plant Strawberries", "strawberry"),
+		3: ("Water Plot", "water"),
+		4: ("Clear Plot", "clear"),
+		5: ("Back To Farm", "back")
+	}
+	nextAction = displayMenuPrompt(options)
+
+	if nextAction == "back":
+		return None
+
+	elif nextAction == "turnip":
+		plot = displayPlotPrompt()
+		plot.plant("turnip")
+
+	elif nextAction == "strawberry":
+		plot = displayPlotPrompt()
+		plot.plant("strawberry")
+
+	elif nextAction == "water":
+		plot = displayPlotPrompt()
+		plot.water()
+
+	elif nextAction == "clear":
+		plot = displayPlotPrompt()
+		plot.clear()
 
 	return "sleep"
 
@@ -73,6 +117,28 @@ def getVillageAction():
 def getShopAction():
 	print("This isn't implemented yet!")
 	return "sleep"
+
+def displayPlotPrompt():
+	while True:
+		maxOption = len(field) - 1
+
+		# Prompt the user to pick an option
+		print("Please choose a plot [0 to %d]." % maxOption)
+
+		choice = input(">")
+
+		# Check the user's input. It should be a number.
+		if not choice.isdigit():
+			print("Please pick a number from 0 to %d.\n" % maxOption )
+			continue
+
+		# Now check that the number is in the valid range.
+		choice = int(choice)
+		if choice >= 0 and choice <= maxOption :
+			return field[choice]
+
+		else:
+			print("Please pick a number from 0 to %d.\n" % maxOption )
 
 def displayMenuPrompt(options):
 	while True:
