@@ -26,7 +26,11 @@ class Plot:
 	def getCropString(self):
 		# Return a user-readable string describing the plot's contents
 		if self._crop:
-			return self._crop.displayName
+			watered = ""
+			if self._watered:
+				watered = "[WATERED]"
+
+			return "%s (growth: %d) %s" % (self._crop.displayName, self._growthTime, watered)
 		else:
 			return "Empty"
 
