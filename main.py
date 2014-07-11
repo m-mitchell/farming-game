@@ -1,36 +1,27 @@
 def main():
 
+	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
 	while True:
 		nextAction = getUserAction()
+		print("You chose to do action %s" % nextAction)
+
 
 
 def getUserAction():
-	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
-	currentSubMenu = None
+		options = {
+			1: ("Visit Field", "field", False),
+			2: ("Visit Barn", "barn", False),
+			3: ("Visit Village", "village", False),
+			4: ("Visit Forest", "forest", True),
+			5: ("Visit Shop", "shop", True),
+			6: ("Sleep", "sleep", True),
+			7: ("Quit", "quit", True)
+		}
+		return displayMenuPrompt(options)
 
-	# Loop until we reach a final action (end of tree).
+
+def displayMenuPrompt(options):
 	while True:
-
-		# Depending on the current submenu, figure out the list of available options.
-		# Each option has a number (the user enters it to pick that option),
-		# a display text ("Visit Field"), an internal text ("field") 
-		# and whether the option is the final option in the branch (True/False).
-		if currentSubMenu == None:
-			# The user isn't in a submenu so show the top-level menu
-			options = {
-				1: ("Visit Field", "field", False),
-				2: ("Visit Barn", "barn", False),
-				3: ("Visit Village", "village", False),
-				4: ("Visit Forest", "forest", True),
-				5: ("Visit Shop", "shop", False),
-				6: ("Sleep", "sleep", True),
-				7: ("Quit", "quit", True)
-			}
-
-		else:
-			raise Exception("Unknown submenu id `%s`." % currentSubMenu) 
-
-
 		# Prompt the user to pick an option
 		print("What do you want to do next?")
 		for num, item in options.items():
@@ -46,7 +37,10 @@ def getUserAction():
 		# Now check that the number is in the valid range.
 		choice = int(choice)
 		if choice > 0 and choice <= len(options) :
-			print("You picked option %d - %s\n" % (choice, options[choice][0]) )
+			(optionDisplayText, optionInternalText, optionIsFinal) = options[choice]
+			print("You picked option %d - %s\n" % (choice, optionDisplayText) )
+			return optionInternalText
+
 		else:
 			print("Please pick a number from 1 to %d.\n" % len(options) )
 
