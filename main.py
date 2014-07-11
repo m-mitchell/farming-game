@@ -15,106 +15,101 @@ field = [
 ]
 
 def main():
-
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
+	gameTime = gt.GameTime.Instance()
+	print("Today's date is " + gameTime.getFormattedDateTime())
+
+	runMainMenu()
+
+
+def runMainMenu():
 	while True:
-		gameTime = gt.GameTime.Instance()
-		print("Today's date is " + gameTime.getFormattedDateTime())
+		# This is the main menu. 
+		options = {
+			1: ("Visit Field", "field"),
+			2: ("Visit Barn", "barn"),
+			3: ("Visit Village", "village"),
+			4: ("Visit Forest", "forest"),
+			5: ("Visit Shop", "shop"),
+			6: ("Sleep", "sleep"),
+			7: ("Quit", "quit")
+		}
+		nextAction = displayMenuPrompt(options)
 
-		getUserAction()
+		# Check the user's choice and perform the appropriate action.
+		if nextAction == "field":
+			runFieldMenu()
 
+		elif nextAction == "barn":
+			runBarnMenu()
 
-def getUserAction():
-	# This is the main menu. 
-	options = {
-		1: ("Visit Field", "field"),
-		2: ("Visit Barn", "barn"),
-		3: ("Visit Village", "village"),
-		4: ("Visit Forest", "forest"),
-		5: ("Visit Shop", "shop"),
-		6: ("Sleep", "sleep"),
-		7: ("Quit", "quit")
-	}
-	nextAction = displayMenuPrompt(options)
+		elif nextAction == "village":
+			runVillageMenu()
 
-	# Check the user's choice and perform the appropriate action.
-	if nextAction == "field":
-		return getFieldAction()
+		elif nextAction == "forest":
+			print("not implemented yet!") # TODO
 
-	elif nextAction == "barn":
-		return getBarnAction()
+		elif nextAction == "shop":
+			runShopMenu()
 
-	elif nextAction == "village":
-		return getVillageAction()
+		elif nextAction == "sleep":
+			# The user wants to sleep. Set the clock to the next day at 6am.
+			gameTime = gt.GameTime.Instance()
+			gameTime.advanceDay()
 
-	elif nextAction == "forest":
-		print("not implemented yet!") # TODO
-
-	elif nextAction == "shop":
-		return getShopAction()
-
-	elif nextAction == "sleep":
-		# The user wants to sleep. Set the clock to the next day at 6am.
-		gameTime = gt.GameTime.Instance()
-		gameTime.advanceDay()
-
-	elif nextAction == "quit":
-		# The user wants to quit the game.
-		print("Bye, see you next time!")
-		exit(0)
-
-	else:
-		return nextAction
+		elif nextAction == "quit":
+			# The user wants to quit the game.
+			print("Bye, see you next time!")
+			exit(0)
 
 
 
-def getFieldAction():
-	print("You walk out to the field and survey the landscape:")
-	for i, plot in enumerate(field):
-		print("Plot %d -- %s" % (i, plot.getCropString()))
+def runFieldMenu():
+	while True:
+		print("You walk out to the field and survey the landscape:")
+		for i, plot in enumerate(field):
+			print("Plot %d -- %s" % (i, plot.getCropString()))
 
-	print("")
+		print("")
 
-	# Show the crop submenu
-	options = {
-		1: ("Plant Turnips", "turnip"),
-		2: ("Plant Strawberries", "strawberry"),
-		3: ("Water Plot", "water"),
-		4: ("Clear Plot", "clear"),
-		5: ("Back To Farm", "back")
-	}
-	nextAction = displayMenuPrompt(options)
+		# Show the crop submenu
+		options = {
+			1: ("Plant Turnips", "turnip"),
+			2: ("Plant Strawberries", "strawberry"),
+			3: ("Water Plot", "water"),
+			4: ("Clear Plot", "clear"),
+			5: ("Back To Farm", "back")
+		}
+		nextAction = displayMenuPrompt(options)
 
-	if nextAction == "back":
-		return None
+		if nextAction == "back":
+			return
 
-	elif nextAction == "turnip":
-		plot = displayPlotPrompt()
-		plot.plant("turnip")
+		elif nextAction == "turnip":
+			plot = displayPlotPrompt()
+			plot.plant("turnip")
 
-	elif nextAction == "strawberry":
-		plot = displayPlotPrompt()
-		plot.plant("strawberry")
+		elif nextAction == "strawberry":
+			plot = displayPlotPrompt()
+			plot.plant("strawberry")
 
-	elif nextAction == "water":
-		plot = displayPlotPrompt()
-		plot.water()
+		elif nextAction == "water":
+			plot = displayPlotPrompt()
+			plot.water()
 
-	elif nextAction == "clear":
-		plot = displayPlotPrompt()
-		plot.clear()
+		elif nextAction == "clear":
+			plot = displayPlotPrompt()
+			plot.clear()
 
-	return "sleep"
-
-def getBarnAction():
+def runBarnMenu():
 	print("This isn't implemented yet!")
 	return "sleep"
 
-def getVillageAction():
+def runVillageMenu():
 	print("This isn't implemented yet!")
 	return "sleep"
 
-def getShopAction():
+def runShopMenu():
 	print("This isn't implemented yet!")
 	return "sleep"
 
