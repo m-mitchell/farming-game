@@ -1,18 +1,12 @@
 import models.GameTime as gt
 import models.Plot as plot
+import models.Field as field
 
 
 
 # Set up some global vars for persistence while we test.
 money = 100
-
-# Our basic field can be an array of plots.
-field = [
-	plot.Plot(),
-	plot.Plot(),
-	plot.Plot(),
-	plot.Plot()
-]
+field = field.Field(4,4)
 
 def main():
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
