@@ -6,6 +6,7 @@ This class represents a rectangular area filled with Plots.
 """
 
 import models.Plot as plot
+import models.GameTime as gt
 
 
 # Our main Field class
@@ -22,6 +23,10 @@ class Field():
 			for j in range(0, height):
 				self._plots[i].append(plot.Plot())
 
+		# Add an event handler for when the day changes.
+		gameTime = gt.GameTime.Instance()
+		gameTime.dayChanged.handle(self.onDayChanged)
+
 	def __iter__(self):
 		for i in range(0, self._width):
 			for j in range(0, self._height):
@@ -34,3 +39,8 @@ class Field():
 		width = int(index / self._height)
 		height = index % self._width
 		return self._plots[width][height]
+
+	def onDayChanged(self):
+		# For now we'll keep it simple, just delegate to the plot.
+		for plot in self:
+			plot.onDayChanged()

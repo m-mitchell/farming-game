@@ -8,7 +8,8 @@ More info about the Singleton pattern can be found here:
 	http://www.oodesign.com/singleton-pattern.html
 """
 
-from util.Singleton import Singleton as Singleton
+from util.Singleton import Singleton
+from util.Event import Event
 
 # Set up some useful game-time related constants
 class Season:
@@ -35,6 +36,14 @@ class GameTime:
 
 		self._hour = 6
 		self._minute = 0
+
+		# Define some custom events for the game time.
+		# Other classes can register event handlers 
+		# to "listen" for changes in the game time state.
+		# E.g., a Field object would want to know when the day has changed
+		# so it can advance the growth state of its plants (among other things).
+		self.dayChanged = Event()
+
 
 	def getFormattedDate(self):
 		# Return the date, in the format "Fall 01, Year 13"
@@ -91,3 +100,6 @@ class GameTime:
 			self._day = 1
 			self._season = 1
 			self._year += 1
+
+		# Trigger the day changed event.
+		self.dayChanged.fire()

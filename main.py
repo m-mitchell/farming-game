@@ -6,7 +6,7 @@ import models.Field as field
 
 # Set up some global vars for persistence while we test.
 money = 100
-field = field.Field(4,4)
+field = field.Field(2,2)
 
 def main():
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
@@ -71,8 +71,9 @@ def runFieldMenu():
 			1: ("Plant Turnips", "turnip"),
 			2: ("Plant Strawberries", "strawberry"),
 			3: ("Water Plot", "water"),
-			4: ("Clear Plot", "clear"),
-			5: ("Back To Farm", "back")
+			4: ("Harvest Plot", "harvest"),
+			5: ("Clear Plot", "clear"),
+			6: ("Back To Farm", "back")
 		}
 		nextAction = displayMenuPrompt(options)
 
@@ -90,6 +91,10 @@ def runFieldMenu():
 		elif nextAction == "water":
 			plot = displayPlotPrompt()
 			plot.water()
+
+		elif nextAction == "harvest":
+			plot = displayPlotPrompt()
+			plot.harvest()
 
 		elif nextAction == "clear":
 			plot = displayPlotPrompt()

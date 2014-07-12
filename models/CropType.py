@@ -31,6 +31,8 @@ class CropType():
 			self.displayName = data['displayName']
 			self.growTime = int(data['growTime'])
 			self.regrows = bool(data['regrows'])
+			if 'regrowTime' in data:
+				self.regrowTime = int(data['regrowTime'])
 			self.shipPrice = int(data['shipPrice'])
 			self.buyPrice = int(data['buyPrice'])
 
