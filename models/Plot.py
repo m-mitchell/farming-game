@@ -6,6 +6,8 @@ This class represents a single tile on a field.
 """
 
 import models.CropType as ct
+from models.Seed import Seed
+from models.Crop import Crop
 
 # Our main Plot class
 class Plot:
@@ -23,15 +25,24 @@ class Plot:
 		self._crop = None
 		self._growTime = None
 
-	def plant(self, type):
-		self._crop = ct.CropType(type)
-		self._growTime = 0
+	def plant(self, type, rucksack):
+		cropType = ct.CropType(type)
+		seed = rucksack.search(Seed, {'internalName': cropType.seed.internalName})
+		if seed:
+			rucksack.remove(seed)
+			self._crop = cropType
+			self._growTime = 0
 
-	def harvest(self):
-		# TODO might be nice to actually obtain some item from this hey? ;)
+	def harvest(self, rucksack):
+		if not self._crop:
+			return None
+
 		if self._growTime < self._crop.growTime:
 			# Not ready for harvest.
-			return
+			return None
+
+		harvestedCrop = Crop("turnip")
+		rucksack.add(harvestedCrop)
 
 		if self._crop.regrows:
 			self._growTime = self._crop.growTime - self._crop.regrowTime

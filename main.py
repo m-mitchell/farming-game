@@ -1,23 +1,33 @@
 import models.GameTime as gt
 import models.Plot as plot
 import models.Field as field
+import models.Rucksack as rs
+
+import models.Seed as seed
+import models.Crop as crop
 
 
 
 # Set up some global vars for persistence while we test.
 money = 100
 field = field.Field(2,2)
+rucksack = rs.Rucksack(4)
+rucksack.add(seed.Seed("strawberry"))
+rucksack.add(seed.Seed("strawberry"))
+rucksack.add(seed.Seed("turnip"))
+rucksack.add(seed.Seed("turnip"))
+
 
 def main():
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
-	gameTime = gt.GameTime.Instance()
-	print("Today's date is " + gameTime.getFormattedDateTime())
-
 	runMainMenu()
 
 
 def runMainMenu():
 	while True:
+		gameTime = gt.GameTime.Instance()
+		print("Today's date is " + gameTime.getFormattedDateTime())
+
 		# This is the main menu. 
 		options = {
 			1: ("Visit Field", "field"),
@@ -60,6 +70,7 @@ def runMainMenu():
 
 def runFieldMenu():
 	while True:
+		print(rucksack)
 		print("You walk out to the field and survey the landscape:")
 		for i, plot in enumerate(field):
 			print("Plot %d -- %s" % (i, plot.getCropString()))
@@ -82,11 +93,11 @@ def runFieldMenu():
 
 		elif nextAction == "turnip":
 			plot = displayPlotPrompt()
-			plot.plant("turnip")
+			plot.plant("turnip", rucksack)
 
 		elif nextAction == "strawberry":
 			plot = displayPlotPrompt()
-			plot.plant("strawberry")
+			plot.plant("strawberry", rucksack)
 
 		elif nextAction == "water":
 			plot = displayPlotPrompt()
@@ -94,7 +105,7 @@ def runFieldMenu():
 
 		elif nextAction == "harvest":
 			plot = displayPlotPrompt()
-			plot.harvest()
+			plot.harvest(rucksack)
 
 		elif nextAction == "clear":
 			plot = displayPlotPrompt()

@@ -41,3 +41,12 @@ class CropType():
 				parsedSeason = getattr(gt.Season, season.upper())
 				parsedSpeed = getattr(GrowSpeed, speed.upper())
 				self.seasons[parsedSeason] = parsedSpeed
+
+			self.seed = SeedType(data['seed'])
+
+class SeedType():
+	def __init__(self, data):
+		self.shipPrice = int(data['shipPrice'])
+		self.buyPrice = int(data['buyPrice'])
+		self.internalName = data['internalName']
+		self.displayName = data['displayName']
