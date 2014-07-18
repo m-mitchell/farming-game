@@ -1,0 +1,54 @@
+FEATURE ROADMAP (sort of!)
+	- ANIMALS
+		- It's probably easiest to define each animal type as its own subclass... too much variation in behavior to just use json file. 
+			- Dog
+			- Cat
+			- Horse
+			- Cow
+			- Sheep
+			- Chicken
+			- Duck?
+			- Alpaca?
+			- Pig? (sadface - not much to do but slaughter them D:)
+			- ...
+		- Animal trait types: brushable, home building (barn or coop), liftable, ...
+		- Individual animals have names, heart levels, happiness? (combo of fed/outside on sunny day/petted/etc), fed status, brushed status (some), pet status, sickness, pregnancy (for some only), item-harvest-status (some only, and varies -- e.g., sheep harvest per 3 days), location (in barn or out), colors? (e.g., black or white sheep!)
+		- Incubator for eggs and pregnancy potion for mammals :)
+
+
+	- PEOPLE
+		- Villagers can def be in JSON files... :)
+		- Villagers have: name, gender, romanceable, friendship/heart level, birthdates, likes/dislikes (probably more like loathes/hates/neutral/likes/loves), schedules (at this time and optionally on this day, go here and stay here, with a default and a priority order), 
+		- Villagers have dialog that varies a lot. Might put this in a separate file. Depends on:
+			- friendship level / relationship status
+			- location / villager's activity
+			- weather, season
+			- current festivals going on, if any
+			- ... ???
+			- also a bit random. talking to them twice = 2 different results probably.
+
+		- Villagers have events associated with their romance/friendship level but therae my be other requirements? (think about how to implement this)
+			- e.g., location (exit farmhouse), day (day before a romantic festival)...
+			- each event, probably its own file (same as below?)
+
+		- Villagers should also have (possibly repeatable) visits to your house
+			- cutscenes from mayor dude (blah blah welcome to farm)
+			- romance interests delivering cookies on romantic cookie day
+
+
+	- ITEMS
+		- Cooking and crafting (recipes)
+			- Add tagging support to generic items to allow creation of semi-generic recipes
+				* For example, we could have an item with the "rootVegetable" tag plus the "oil" item = roasted veggie. 
+				  Items with the rootVegetable tag aren't necessarily in the same part of the hierarchy. Consider potato (crop) vs bamboo shoot.
+				* Tagging could also be used for villager likes/dislikes ("cute", "shiny", "garbage", etc...)
+
+	- BUILDINGS AND FURNITURE
+		- Most buildings have a starting level and can be upgraded, e.g., your main house starts small and can expand in size, add rooms etc
+		- Some buildings build from scratch: chicken coop, barn, greenhouse, maybe luxury cabins?
+		- Housing buildings can also have furniture installed
+			- Kitchen appliances such as stove, knife, pot, etc.
+			- Big bed
+			- Cabinet, tool chest, fridge, ...
+			- TV
+			- ...
