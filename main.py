@@ -1,21 +1,21 @@
 import models.GameTime as gt
 import models.Plot as plot
 import models.Field as field
-import models.Rucksack as rs
 
 import models.Seed as seed
 import models.Crop as crop
 
+from models.PlayerCharacter import PlayerCharacter
 
 
 # Set up some global vars for persistence while we test.
-money = 100
 field = field.Field(2,2)
-rucksack = rs.Rucksack(4)
-rucksack.add(seed.Seed("strawberrySeed"))
-rucksack.add(seed.Seed("strawberrySeed"))
-rucksack.add(seed.Seed("turnipSeed"))
-rucksack.add(seed.Seed("turnipSeed"))
+
+player = PlayerCharacter()
+player.rucksack.add(seed.Seed("strawberrySeed"))
+player.rucksack.add(seed.Seed("strawberrySeed"))
+player.rucksack.add(seed.Seed("turnipSeed"))
+player.rucksack.add(seed.Seed("turnipSeed"))
 
 
 def main():
@@ -70,7 +70,7 @@ def runMainMenu():
 
 def runFieldMenu():
 	while True:
-		print(rucksack)
+		print(player.rucksack)
 		print("You walk out to the field and survey the landscape:")
 		for i, plot in enumerate(field):
 			print("Plot %d -- %s" % (i, plot.getCropString()))
@@ -93,11 +93,11 @@ def runFieldMenu():
 
 		elif nextAction == "turnip":
 			plot = displayPlotPrompt()
-			plot.plant("turnip", rucksack)
+			plot.plant("turnip", player.rucksack)
 
 		elif nextAction == "strawberry":
 			plot = displayPlotPrompt()
-			plot.plant("strawberry", rucksack)
+			plot.plant("strawberry", player.rucksack)
 
 		elif nextAction == "water":
 			plot = displayPlotPrompt()
@@ -105,7 +105,7 @@ def runFieldMenu():
 
 		elif nextAction == "harvest":
 			plot = displayPlotPrompt()
-			plot.harvest(rucksack)
+			plot.harvest(player.rucksack)
 
 		elif nextAction == "clear":
 			plot = displayPlotPrompt()
