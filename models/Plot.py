@@ -54,7 +54,7 @@ class Plot:
 		if self._watered and self._crop and self._crop.growTime > self._growTime:
 			self._growTime += 1
 
-		#self._watered = False # TODO uncomment this
+		self._watered = False
 
 	def getCropString(self):
 		# Return a user-readable string describing the plot's contents
