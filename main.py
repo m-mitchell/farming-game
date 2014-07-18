@@ -12,10 +12,10 @@ import models.Crop as crop
 money = 100
 field = field.Field(2,2)
 rucksack = rs.Rucksack(4)
-rucksack.add(seed.Seed("strawberry"))
-rucksack.add(seed.Seed("strawberry"))
-rucksack.add(seed.Seed("turnip"))
-rucksack.add(seed.Seed("turnip"))
+rucksack.add(seed.Seed("strawberrySeed"))
+rucksack.add(seed.Seed("strawberrySeed"))
+rucksack.add(seed.Seed("turnipSeed"))
+rucksack.add(seed.Seed("turnipSeed"))
 
 
 def main():

@@ -5,7 +5,6 @@ This class represents a single tile on a field.
 
 """
 
-import models.CropType as ct
 from models.Seed import Seed
 from models.Crop import Crop
 
@@ -25,12 +24,12 @@ class Plot:
 		self._crop = None
 		self._growTime = None
 
-	def plant(self, type, rucksack):
-		cropType = ct.CropType(type)
-		seed = rucksack.search(Seed, {'internalName': cropType.seed.internalName})
+	def plant(self, internalName, rucksack):
+		crop = Crop(internalName)
+		seed = rucksack.search(Seed, {'internalName': crop.seed.internalName})
 		if seed:
 			rucksack.remove(seed)
-			self._crop = cropType
+			self._crop = crop
 			self._growTime = 0
 
 	def harvest(self, rucksack):
@@ -41,10 +40,11 @@ class Plot:
 			# Not ready for harvest.
 			return None
 
-		harvestedCrop = Crop("turnip")
-		rucksack.add(harvestedCrop)
+		# TODO could add some logic for quality/quantity of harvest here
+		rucksack.add(self._crop)
 
 		if self._crop.regrows:
+			self._crop = Crop(self._crop.internalName)
 			self._growTime = self._crop.growTime - self._crop.regrowTime
 		else:
 			self._crop = None

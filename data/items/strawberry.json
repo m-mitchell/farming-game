@@ -1,0 +1,20 @@
+{
+	"internalName": "strawberry",
+	"displayName": "Strawberry",
+
+	"growTime": 10,
+	"regrows": true,
+	"regrowTime": 5,
+	"seasons": {
+		"spring": "normal",
+		"summer": "normal",
+		"fall": "slow",
+		"winter": "none"
+	},
+
+	"seed": "strawberrySeed",
+
+	"shipPrice": 30,
+	"buyPrice": 300
+
+}

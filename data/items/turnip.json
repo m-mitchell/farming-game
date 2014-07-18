@@ -1,0 +1,19 @@
+{
+	"internalName": "turnip",
+	"displayName": "Turnip",
+
+	"growTime": 5,
+	"regrows": false,
+	"seasons": {
+		"spring": "normal",
+		"summer": "normal",
+		"fall": "slow",
+		"winter": "none"
+	},
+
+	"seed": "turnipSeed",
+
+	"shipPrice": 30,
+	"buyPrice": 300
+
+}
