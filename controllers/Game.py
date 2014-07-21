@@ -1,5 +1,7 @@
 import pygame
+
 from controllers.BaseController import BaseController
+from models.PlayerCharacter import PlayerCharacter
 from gui.Hud import Hud
 
 class Game(BaseController):
@@ -7,7 +9,10 @@ class Game(BaseController):
 
 	def __init__(self):
 		super().__init__()
-		self.hud = Hud(self.background)
+
+		self.player = PlayerCharacter()
+
+		self.hud = Hud(self.background, self.player)
 
 	def tick(self):
 		self.clock.tick(self.TICK_TIME)
@@ -16,11 +21,26 @@ class Game(BaseController):
 				self.quit = True
 
 			elif event.type == pygame.KEYDOWN:
-				if(event.key == pygame.K_DOWN):
+				if(event.key == pygame.K_LEFT):
 					pass
 
 				elif(event.key == pygame.K_UP):
 					pass
+
+				elif(event.key == pygame.K_RIGHT):
+					pass
+
+				elif(event.key == pygame.K_DOWN):
+					pass
+
+				elif(event.key == pygame.K_z):
+					self.player.previousTool()
+
+				elif(event.key == pygame.K_x):
+					self.player.nextTool()
+
+				elif(event.key == pygame.K_c):
+					self.player.unequipTool()
 
 
 	def run(self):

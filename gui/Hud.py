@@ -8,8 +8,9 @@ class Hud(object):
 	LINE_HEIGHT = FONT_SIZE * 1.2
 	MARGIN = 10
 
-	def __init__(self, surface):
+	def __init__(self, surface, player):
 		self.surface = surface
+		self.player = player
 		self.font = pygame.font.Font(self.FONT_FACE, self.FONT_SIZE)
 		self.cursorIndex = 0
 
@@ -19,6 +20,12 @@ class Hud(object):
 		# Render the date/time info
 		gameTime = GameTime.Instance()
 		lines.append(gameTime.getFormattedDateTime())
+
+		# Render the current tool
+		toolText = "None"
+		if self.player.currentTool:
+			toolText = self.player.currentTool.displayName
+		lines.append("Tool: " + toolText)
 
 
 		for i, line in enumerate(lines):

@@ -23,8 +23,6 @@ player.rucksack.add(seed.Seed("turnipSeed"))
 
 
 def main():
-	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
-	#runMainMenu()
 	pygame.init()
 	pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 	pygame.display.set_caption("Farming Game")

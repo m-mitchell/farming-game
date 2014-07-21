@@ -11,13 +11,13 @@ class Rucksack(object):
 	def __init__(self, size=8):
 		# The constructor. Set up the internal vars.
 		self._size = size
-		self._contents = set()
+		self._contents = []
 
 	def add(self, item):
 		if self._size == len(self._contents):
 			return False
 
-		self._contents.add(item)
+		self._contents.append(item)
 		return True
 
 	def remove(self, item):
@@ -33,6 +33,10 @@ class Rucksack(object):
 						return item
 
 		return None
+
+	def __iter__(self):
+		for item in self._contents:
+			yield item
 
 	def __contains__(self, item):
 		return item in self._contents
