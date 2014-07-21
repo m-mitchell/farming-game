@@ -1,11 +1,15 @@
+import pygame, time
+
+import models.Config as config
+
 import models.GameTime as gt
 import models.Plot as plot
 import models.Field as field
-
 import models.Seed as seed
 import models.Crop as crop
 
 from models.PlayerCharacter import PlayerCharacter
+from controllers.MainMenu import MainMenu
 
 
 # Set up some global vars for persistence while we test.
@@ -20,9 +24,20 @@ player.rucksack.add(seed.Seed("turnipSeed"))
 
 def main():
 	# This is a really hacky menu system, but it's 100% temporary so that's OK. 
-	runMainMenu()
+	#runMainMenu()
+	pygame.init()
+	pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
+	pygame.display.set_caption("Farming Game")
+
+	controller = MainMenu
+	while controller:
+		controller = controller().run()
 
 
+if __name__=='__main__':
+	main()
+
+# TODO everything below this line should be junkable
 def runMainMenu():
 	while True:
 		gameTime = gt.GameTime.Instance()
@@ -168,6 +183,3 @@ def displayMenuPrompt(options):
 
 		else:
 			print("Please pick a number from 1 to %d.\n" % len(options) )
-
-if __name__=='__main__':
-	main()
