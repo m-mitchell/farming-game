@@ -1,11 +1,13 @@
 import pygame
 from controllers.BaseController import BaseController
+from gui.Hud import Hud
 
 class Game(BaseController):
 	BACKGROUND_COLOR = (255,255,255)
 
 	def __init__(self):
 		super().__init__()
+		self.hud = Hud(self.background)
 
 	def tick(self):
 		self.clock.tick(self.TICK_TIME)
@@ -26,6 +28,7 @@ class Game(BaseController):
 			self.tick()
 
 			self.background.fill(self.BACKGROUND_COLOR)
+			self.hud.render()
 			self.screen.blit(self.background, (0,0))
 
 			pygame.display.flip()

@@ -1,13 +1,12 @@
 import pygame
-from models.Menu import Menu
 from controllers.BaseController import BaseController
 from controllers.Game import Game
+from gui.Menu import Menu
 
 class MainMenu(BaseController):
 	BACKGROUND_COLOR = (128,128,128)
 
 	def __init__(self):
-
 		super().__init__()
 
 		options = [
