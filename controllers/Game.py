@@ -13,6 +13,7 @@ class Game(BaseController):
 
         self.player = PlayerCharacter()
         self.currentMap = Map(self.background, 'test')
+        self.spriteList = pygame.sprite.RenderPlain([self.player])
         self.hud = Hud(self.background, self.player)
 
     def tick(self):
@@ -23,16 +24,16 @@ class Game(BaseController):
 
             elif event.type == pygame.KEYDOWN:
                 if(event.key == pygame.K_LEFT):
-                    pass
+                    self.player.moveLeft()
 
                 elif(event.key == pygame.K_UP):
-                    pass
+                    self.player.moveUp()
 
                 elif(event.key == pygame.K_RIGHT):
-                    pass
+                    self.player.moveRight()
 
                 elif(event.key == pygame.K_DOWN):
-                    pass
+                    self.player.moveDown()
 
                 elif(event.key == pygame.K_z):
                     self.player.previousTool()
@@ -50,6 +51,10 @@ class Game(BaseController):
 
             self.background.fill(self.BACKGROUND_COLOR)
             self.currentMap.render()
+
+            self.spriteList.update()
+            self.spriteList.draw(self.background)
+
             self.hud.render()
             self.screen.blit(self.background, (0,0))
 

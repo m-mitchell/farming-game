@@ -2,15 +2,17 @@
 PlayerCharacter
 
 """
-
 from models.Rucksack import Rucksack
 from models.Seed import Seed
 from models.Tool import Tool
+from models.Mob import Mob
 
 # Our main PlayerCharacter class
-class PlayerCharacter(object):
+class PlayerCharacter(Mob):
     def __init__(self):
         # The constructor. Set up the internal vars.
+        super(PlayerCharacter, self).__init__("player")
+
         self.rucksack = Rucksack()
         self.money = 100
         self.currentTool = None

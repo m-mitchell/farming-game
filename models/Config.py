@@ -4,9 +4,9 @@ Config
 This represents the project config.
 """
 
-# Set up some useful game-time related constants
 PROJECT_ROOT = r"D:\Documents\farmingGame"
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 640
+SCREEN_HEIGHT = 480
+MOB_SIZE = (32, 64)
 TICK_TIME = 25

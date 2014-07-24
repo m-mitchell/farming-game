@@ -23,7 +23,8 @@ class Map(object):
     def render(self):
         temp = pygame.Surface(self._renderer.size)
         self._renderer.render(temp)
-        pygame.transform.smoothscale(temp, self._surface.get_size(), self._surface)
+        #pygame.transform.smoothscale(temp, self._surface.get_size(), self._surface)
+        self._surface.blit(temp, (0,0))
 
     def load_map(self):
         self._renderer = TiledRenderer(self._filename)
