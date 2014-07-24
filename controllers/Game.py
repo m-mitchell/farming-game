@@ -2,6 +2,7 @@ import pygame
 
 from controllers.BaseController import BaseController
 from models.PlayerCharacter import PlayerCharacter
+from models.Map import Map
 from gui.Hud import Hud
 
 class Game(BaseController):
@@ -11,7 +12,7 @@ class Game(BaseController):
 		super().__init__()
 
 		self.player = PlayerCharacter()
-
+		self.currentMap = Map(self.background, 'test')
 		self.hud = Hud(self.background, self.player)
 
 	def tick(self):
@@ -48,6 +49,7 @@ class Game(BaseController):
 			self.tick()
 
 			self.background.fill(self.BACKGROUND_COLOR)
+			self.currentMap.render()
 			self.hud.render()
 			self.screen.blit(self.background, (0,0))
 

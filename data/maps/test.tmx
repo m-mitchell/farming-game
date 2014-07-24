@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="29" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="ground" tilewidth="32" tileheight="32">
+  <image source="../../media/images/tiles/ground.png" width="96" height="32"/>
+ </tileset>
+ <tileset firstgid="4" name="bed" tilewidth="32" tileheight="32">
+  <image source="../../media/images/furniture/bed.png" width="32" height="64"/>
+ </tileset>
+ <layer name="ground" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYCSAmfBgQnrJxaN2jto5FO0cCMyMB4/aOWrnqJ2jeBQThwFABwLY
+  </data>
+ </layer>
+ <layer name="objects" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALsgGUA7GQdADtHwSgYBaMAADM8AAo=
+  </data>
+ </layer>
+</map>
