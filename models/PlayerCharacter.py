@@ -5,7 +5,7 @@ PlayerCharacter
 from models.Rucksack import Rucksack
 from models.Seed import Seed
 from models.Tool import Tool
-from models.Mob import Mob
+from models.Mob import Mob, Direction
 
 # Our main PlayerCharacter class
 class PlayerCharacter(Mob):

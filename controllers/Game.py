@@ -3,6 +3,7 @@ import pygame
 from controllers.BaseController import BaseController
 from models.PlayerCharacter import PlayerCharacter
 from models.Map import Map
+from models.Mob import Direction
 from gui.Hud import Hud
 
 class Game(BaseController):
@@ -23,17 +24,17 @@ class Game(BaseController):
                 self.quit = True
 
             elif event.type == pygame.KEYDOWN:
-                if(event.key == pygame.K_LEFT):
-                    self.player.moveLeft()
-
-                elif(event.key == pygame.K_UP):
-                    self.player.moveUp()
+                if(event.key == pygame.K_UP):
+                    self.player.move(Direction.UP)
 
                 elif(event.key == pygame.K_RIGHT):
-                    self.player.moveRight()
+                    self.player.move(Direction.RIGHT)
+
+                elif(event.key == pygame.K_LEFT):
+                    self.player.move(Direction.LEFT)
 
                 elif(event.key == pygame.K_DOWN):
-                    self.player.moveDown()
+                    self.player.move(Direction.DOWN)
 
                 elif(event.key == pygame.K_z):
                     self.player.previousTool()
