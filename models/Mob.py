@@ -24,6 +24,8 @@ class Mob(pygame.sprite.Sprite):
         self._direction = Direction.DOWN
         self._animation = self._animations[1]
         self.image = self._animation[0]
+
+        self.walkTimer=config.WALK_TIMER
         
         self.pos = pos
         self.rect = self.image.get_rect()
@@ -62,6 +64,8 @@ class Mob(pygame.sprite.Sprite):
         elif self._direction == Direction.LEFT:
             self._animation = self._animations[3]
 
+
+
         self.image = self._animation[0]
 
 
@@ -73,7 +77,16 @@ class Mob(pygame.sprite.Sprite):
         heightDifference = (config.MOB_SIZE[1] - config.TILE_SIZE)
         self.rect.y = (self.pos[1] * config.TILE_SIZE) - heightDifference
 
+    def update(self):
+        if self.walkTimer > 0:
+            self.walkTimer-=1
+
     def move(self, direction):
+        if self.walkTimer > 0:
+            return
+
+        self.walkTimer=config.WALK_TIMER
+        
         if direction == Direction.UP:
             self.pos = (self.pos[0], self.pos[1]-1)
 

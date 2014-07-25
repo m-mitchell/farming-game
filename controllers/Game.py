@@ -24,19 +24,7 @@ class Game(BaseController):
                 self.quit = True
 
             elif event.type == pygame.KEYDOWN:
-                if(event.key == pygame.K_UP):
-                    self.player.move(Direction.UP)
-
-                elif(event.key == pygame.K_RIGHT):
-                    self.player.move(Direction.RIGHT)
-
-                elif(event.key == pygame.K_LEFT):
-                    self.player.move(Direction.LEFT)
-
-                elif(event.key == pygame.K_DOWN):
-                    self.player.move(Direction.DOWN)
-
-                elif(event.key == pygame.K_z):
+                if(event.key == pygame.K_z):
                     self.player.previousTool()
 
                 elif(event.key == pygame.K_x):
@@ -44,6 +32,21 @@ class Game(BaseController):
 
                 elif(event.key == pygame.K_c):
                     self.player.unequipTool()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            self.player.move(Direction.UP)
+
+        elif keys[pygame.K_RIGHT]:
+            self.player.move(Direction.RIGHT)
+
+        elif keys[pygame.K_LEFT]:
+            self.player.move(Direction.LEFT)
+
+        elif keys[pygame.K_DOWN]:
+            self.player.move(Direction.DOWN)
+
+
 
 
     def run(self):
