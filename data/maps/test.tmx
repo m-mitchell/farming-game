@@ -7,13 +7,32 @@
   <image source="../../media/images/furniture/bed.png" width="32" height="64"/>
  </tileset>
  <layer name="ground" width="20" height="15">
+  <properties>
+   <property name="z-index" value="0"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYCSAmfBgQnpHzRt55lEbM+PBo+aNLPMA3QUBwA==
+   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
   </data>
  </layer>
- <layer name="objects" width="20" height="15">
+ <layer name="ground_objects" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMmPBgcsCoecPbPGoDZjx41LyRZR4A/g8A9g==
+  </data>
+ </layer>
+ <layer name="collision" width="20" height="15">
+  <properties>
+   <property name="z-index" value="10"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2B4AhYqm8dKZfNGAekAABOUAAo=
+  </data>
+ </layer>
+ <layer name="overhead" width="20" height="15">
+  <properties>
+   <property name="z-index" value="20"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
   </data>
  </layer>
 </map>

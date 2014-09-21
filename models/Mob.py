@@ -81,26 +81,31 @@ class Mob(pygame.sprite.Sprite):
         if self.walkTimer > 0:
             self.walkTimer-=1
 
-    def move(self, direction):
+    def move(self, current_map, direction):
         if self.walkTimer > 0:
             return
 
         self.walkTimer=config.WALK_TIMER
         
         if direction == Direction.UP:
-            self.pos = (self.pos[0], self.pos[1]-1)
+            target_pos = (self.pos[0], self.pos[1]-1)
 
         elif direction == Direction.DOWN:
-            self.pos = (self.pos[0], self.pos[1]+1)
+            target_pos = (self.pos[0], self.pos[1]+1)
 
         elif direction == Direction.LEFT:
-            self.pos = (self.pos[0]-1, self.pos[1])
+            target_pos = (self.pos[0]-1, self.pos[1])
 
         elif direction == Direction.RIGHT:
-            self.pos = (self.pos[0]+1, self.pos[1])
+            target_pos = (self.pos[0]+1, self.pos[1])
 
         else:
             raise ValueError("Unrecognized direction %s" % direction)
+
+        if not current_map.is_walkable(*target_pos):
+            return
+
+        self.pos = target_pos
 
         self._direction = direction
         self._updateRect()

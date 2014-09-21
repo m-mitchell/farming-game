@@ -35,16 +35,16 @@ class Game(BaseController):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
-            self.player.move(Direction.UP)
+            self.player.move(self.currentMap, Direction.UP)
 
         elif keys[pygame.K_RIGHT]:
-            self.player.move(Direction.RIGHT)
+            self.player.move(self.currentMap, Direction.RIGHT)
 
         elif keys[pygame.K_LEFT]:
-            self.player.move(Direction.LEFT)
+            self.player.move(self.currentMap, Direction.LEFT)
 
         elif keys[pygame.K_DOWN]:
-            self.player.move(Direction.DOWN)
+            self.player.move(self.currentMap, Direction.DOWN)
 
 
 
