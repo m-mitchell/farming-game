@@ -21,6 +21,7 @@ class Plot(Sprite):
         # The constructor. Set up the internal vars.
         self._crop = None
         self._growTime = None
+        self._plowed = False
         self._watered = False
 
         # Add an event handler for when the day changes.
@@ -43,14 +44,22 @@ class Plot(Sprite):
     def interact(self, heldItem):
         print(str(self))
 
+        if not heldItem:
+            self.harvest()
+
     def water(self):
         self._watered = True
 
     def clear(self):
         self._crop = None
         self._growTime = None
+        self._plowed = True
 
     def plant(self, internalName):
+        # To plant, we need a plowed, unplanted plot.
+        if not self._plowed or self._crop:
+            return False
+
         crop = Crop(internalName)
         rucksack = getPlayer().rucksack
         seed = rucksack.search(Seed, {'internalName': crop.seed.internalName})
@@ -59,7 +68,7 @@ class Plot(Sprite):
             self._crop = crop
             self._growTime = 0
 
-    def harvest(self, rucksack):
+    def harvest(self):
         if not self._crop:
             return None
 
@@ -68,6 +77,7 @@ class Plot(Sprite):
             return None
 
         # TODO could add some logic for quality/quantity of harvest here
+        rucksack = getPlayer().rucksack
         rucksack.add(self._crop)
 
         if self._crop.regrows:
@@ -85,11 +95,15 @@ class Plot(Sprite):
 
     def __str__(self):
         # Return a user-readable string describing the plot's contents
+        plowed = ""
+        if self._plowed:
+            plowed = "[PLOWED]"
+
         if self._crop:
             watered = ""
             if self._watered:
                 watered = "[WATERED]"
 
-            return "%s (growth: %d) %s" % (self._crop.displayName, self._growTime, watered)
+            return "%s (growth: %d) %s %s" % (self._crop.displayName, self._growTime, plowed, watered)
         else:
-            return "Empty"
+            return "Empty %s" % (plowed)
