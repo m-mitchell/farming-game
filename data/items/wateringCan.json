@@ -1,6 +1,7 @@
  {
 		"internalName": "wateringCan",
 		"displayName": "Watering Can",
+		"type": "wateringCan",
 		"shipPrice": 50,
 		"buyPrice": 500
 }

@@ -9,3 +9,4 @@ from models.Item import Item
 class Tool(Item):
     def __init__(self, internalName):
         super().__init__(internalName)
+        self.type = self._rawData['type']

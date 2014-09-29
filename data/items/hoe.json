@@ -1,6 +1,7 @@
  {
 		"internalName": "hoe",
 		"displayName": "Hoe",
+		"type": "hoe",
 		"shipPrice": 50,
 		"buyPrice": 500
 }

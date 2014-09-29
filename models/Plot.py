@@ -6,6 +6,7 @@ This class represents a single tile of a field.
 """
 
 from models.Seed import Seed
+from models.Tool import Tool
 from models.Crop import Crop
 from models.Sprite import Sprite
 from models.GameTime import GameTime
@@ -26,14 +27,15 @@ class Plot(Sprite):
         gameTime.dayChanged.handle(self.on_day_changed)
 
     def use_tool(self, tool):
-        if tool.internalName == 'hoe':
-            self.clear()
-
-        elif tool.internalName == 'wateringCan':
-            self.water()
-
-        elif type(tool) is Seed:
+        if type(tool) is Seed:
             self.plant(tool.crop)
+
+        elif type(tool) is Tool:
+            if tool.type == 'hoe':
+                self.clear()
+
+            elif tool.type == 'wateringCan':
+                self.water()
 
         return False
 
