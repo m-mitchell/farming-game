@@ -14,7 +14,7 @@ class Direction:
     LEFT = 4
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, sprite, pos=(0,0)):
+    def __init__(self, sprite, pos, collision=False):
         super(Sprite, self).__init__()
 
         filename = r'%s\media\images\sprites\%s.png' % (config.PROJECT_ROOT, sprite)
@@ -22,6 +22,7 @@ class Sprite(pygame.sprite.Sprite):
 
         self.pos = pos
         self.rect = self.image.get_rect()
+        self.collision=collision
 
         self._updateRect()
 

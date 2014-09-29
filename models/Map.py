@@ -46,6 +46,13 @@ class Map(object):
         walkable = True
         for layer in self._layers:
             walkable = walkable and layer.isWalkable(x, y)
+
+        rect = pygame.Rect(x*config.TILE_SIZE, y*config.TILE_SIZE, config.TILE_SIZE, config.TILE_SIZE)
+        for obj in self._objects.sprites():
+            if obj.collision and obj.rect.colliderect(rect):
+               walkable = False
+               break
+
         return walkable
 
     def interact(self, heldItem, x, y):

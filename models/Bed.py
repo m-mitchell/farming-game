@@ -10,7 +10,7 @@ from models.GameTime import GameTime
 class Bed(Sprite):
     def __init__(self, pos):
         image = "bed"
-        super(Bed, self).__init__(image, pos)
+        super(Bed, self).__init__(image, pos, collision=True)
 
     def interact(self, item):
         if item is None:
