@@ -10,6 +10,7 @@ from models.Tool import Tool
 from models.Crop import Crop
 from models.Sprite import Sprite
 from models.GameTime import GameTime
+from models.PlayerCharacter import getPlayer
 
 # Our main Plot class
 class Plot(Sprite):
@@ -49,12 +50,12 @@ class Plot(Sprite):
         self._crop = None
         self._growTime = None
 
-    def plant(self, internalName, rucksack=None):
+    def plant(self, internalName):
         crop = Crop(internalName)
-        #seed = rucksack.search(Seed, {'internalName': crop.seed.internalName})
-        #if seed:
-        if True:
-            #rucksack.remove(seed)
+        rucksack = getPlayer().rucksack
+        seed = rucksack.search(Seed, {'internalName': crop.seed.internalName})
+        if seed:
+            rucksack.remove(seed)
             self._crop = crop
             self._growTime = 0
 

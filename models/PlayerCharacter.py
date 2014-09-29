@@ -7,6 +7,14 @@ from models.Seed import Seed
 from models.Tool import Tool
 from models.Mob import Mob, Direction
 
+def getPlayer():
+    global __current
+    return __current
+
+def setPlayer(player):
+    global __current
+    __current = player
+
 # Our main PlayerCharacter class
 class PlayerCharacter(Mob):
     def __init__(self):

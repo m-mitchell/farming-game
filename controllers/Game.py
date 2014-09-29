@@ -1,7 +1,7 @@
 import pygame
 
 from controllers.BaseController import BaseController
-from models.PlayerCharacter import PlayerCharacter
+from models.PlayerCharacter import getPlayer
 from models.Map import Map
 from models.Mob import Direction
 from gui.Hud import Hud
@@ -12,10 +12,10 @@ class Game(BaseController):
     def __init__(self):
         super().__init__()
 
-        self.player = PlayerCharacter()
+        self.player = getPlayer()
         self.currentMap = Map(self.background, 'test')
-        self.spriteList = pygame.sprite.RenderPlain([self.player])
-        self.hud = Hud(self.background, self.player)
+        self.spriteList = pygame.sprite.RenderPlain([self.player,])
+        self.hud = Hud(self.background)
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)

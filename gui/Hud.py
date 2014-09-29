@@ -1,5 +1,6 @@
 import pygame
 from models.GameTime import GameTime
+from models.PlayerCharacter import getPlayer
 
 class Hud(object):
     FONT_SIZE = 18
@@ -8,9 +9,8 @@ class Hud(object):
     LINE_HEIGHT = FONT_SIZE * 1.2
     MARGIN = 10
 
-    def __init__(self, surface, player):
+    def __init__(self, surface):
         self.surface = surface
-        self.player = player
         self.font = pygame.font.Font(self.FONT_FACE, self.FONT_SIZE)
 
     def render(self):
@@ -22,8 +22,8 @@ class Hud(object):
 
         # Render the current tool
         toolText = "None"
-        if self.player.currentTool:
-            toolText = self.player.currentTool.displayName
+        if getPlayer().currentTool:
+            toolText = getPlayer().currentTool.displayName
         lines.append("Tool: " + toolText)
 
 
