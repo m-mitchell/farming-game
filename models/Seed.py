@@ -9,3 +9,4 @@ from models.Item import Item
 class Seed(Item):
     def __init__(self, internalName):
         super().__init__(internalName)
+        self.crop = self._rawData['crop']

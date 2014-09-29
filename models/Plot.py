@@ -20,6 +20,28 @@ class Plot(Sprite):
         self._growTime = None
         self._watered = False
 
+    def use_tool(self, tool):
+        if tool.internalName == 'hoe':
+            self.clear()
+
+        elif tool.internalName == 'wateringCan':
+            self.water()
+
+        elif type(tool) is Seed:
+            self.plant(tool.crop)
+
+        return False
+
+    def interact(self, held_item):
+        crop_name = "Empty"
+        if self._crop:
+            crop_name = self._crop.internalName
+
+        watered_status = "Dry"
+        if self._watered:
+            watered_status = "Watered"
+
+        print("Plot status: %s (%s)" % (crop_name, watered_status))
 
     def water(self):
         self._watered = True
@@ -28,11 +50,12 @@ class Plot(Sprite):
         self._crop = None
         self._growTime = None
 
-    def plant(self, internalName, rucksack):
+    def plant(self, internalName, rucksack=None):
         crop = Crop(internalName)
-        seed = rucksack.search(Seed, {'internalName': crop.seed.internalName})
-        if seed:
-            rucksack.remove(seed)
+        #seed = rucksack.search(Seed, {'internalName': crop.seed.internalName})
+        #if seed:
+        if True:
+            #rucksack.remove(seed)
             self._crop = crop
             self._growTime = 0
 

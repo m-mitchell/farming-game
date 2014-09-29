@@ -1,6 +1,7 @@
 {
 		"internalName": "strawberrySeed",
 		"displayName": "Strawberry Seeds",
+		"crop": "strawberry",
 		"shipPrice": 5,
 		"buyPrice": 20
 }

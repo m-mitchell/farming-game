@@ -16,7 +16,6 @@ class Bed(Sprite):
         if item is None:
             self.__sleep()
 
-
     def __sleep(self):
         print("Sleeping...")
         gameTime = GameTime.Instance()

@@ -1,6 +1,7 @@
  {
 		"internalName": "turnipSeed",
 		"displayName": "Turnip Seeds",
+		"crop": "turnip",
 		"shipPrice": 5,
 		"buyPrice": 10
 }
