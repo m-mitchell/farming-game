@@ -1,13 +1,14 @@
 """
 Plot
 
-This class represents a single tile on a field. 
+This class represents a single tile of a field. 
 
 """
 
 from models.Seed import Seed
 from models.Crop import Crop
 from models.Sprite import Sprite
+from models.GameTime import GameTime
 
 # Our main Plot class
 class Plot(Sprite):
@@ -19,6 +20,10 @@ class Plot(Sprite):
         self._crop = None
         self._growTime = None
         self._watered = False
+
+        # Add an event handler for when the day changes.
+        gameTime = GameTime.Instance()
+        gameTime.dayChanged.handle(self.on_day_changed)
 
     def use_tool(self, tool):
         if tool.internalName == 'hoe':
@@ -41,7 +46,7 @@ class Plot(Sprite):
         if self._watered:
             watered_status = "Watered"
 
-        print("Plot status: %s (%s)" % (crop_name, watered_status))
+        print(str(self))
 
     def water(self):
         self._watered = True
@@ -77,13 +82,13 @@ class Plot(Sprite):
             self._crop = None
             self._growTime = None
 
-    def onDayChanged(self):
+    def on_day_changed(self):
         if self._watered and self._crop and self._crop.growTime > self._growTime:
             self._growTime += 1
 
         self._watered = False
 
-    def getCropString(self):
+    def __str__(self):
         # Return a user-readable string describing the plot's contents
         if self._crop:
             watered = ""

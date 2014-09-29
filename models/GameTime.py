@@ -40,8 +40,8 @@ class GameTime:
         # Define some custom events for the game time.
         # Other classes can register event handlers 
         # to "listen" for changes in the game time state.
-        # E.g., a Field object would want to know when the day has changed
-        # so it can advance the growth state of its plants (among other things).
+        # E.g., a Plot object would want to know when the day has changed
+        # so it can advance the growth state of its plant (among other things).
         self.dayChanged = Event()
 
 
