@@ -5,6 +5,7 @@ from models.PlayerCharacter import getPlayer
 from models.Map import Map
 from models.Mob import Direction
 from gui.Hud import Hud
+from gui.Inventory import Inventory
 
 class Game(BaseController):
     BACKGROUND_COLOR = (255,255,255)
@@ -16,6 +17,7 @@ class Game(BaseController):
         self.currentMap = Map(self.background, 'test')
         self.spriteList = pygame.sprite.RenderPlain([self.player,])
         self.hud = Hud(self.background)
+        self.inventory = Inventory(self.background)
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)
@@ -63,7 +65,10 @@ class Game(BaseController):
             self.spriteList.draw(self.background)
 
             self.hud.render()
+            self.inventory.render()
+
             self.screen.blit(self.background, (0,0))
+
 
             pygame.display.flip()
 
