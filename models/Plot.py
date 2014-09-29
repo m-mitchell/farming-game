@@ -24,9 +24,9 @@ class Plot(Sprite):
 
         # Add an event handler for when the day changes.
         gameTime = GameTime.Instance()
-        gameTime.dayChanged.handle(self.on_day_changed)
+        gameTime.dayChanged.handle(self.onDayChanged)
 
-    def use_tool(self, tool):
+    def useTool(self, tool):
         if type(tool) is Seed:
             self.plant(tool.crop)
 
@@ -39,15 +39,7 @@ class Plot(Sprite):
 
         return False
 
-    def interact(self, held_item):
-        crop_name = "Empty"
-        if self._crop:
-            crop_name = self._crop.internalName
-
-        watered_status = "Dry"
-        if self._watered:
-            watered_status = "Watered"
-
+    def interact(self, heldItem):
         print(str(self))
 
     def water(self):
@@ -84,7 +76,7 @@ class Plot(Sprite):
             self._crop = None
             self._growTime = None
 
-    def on_day_changed(self):
+    def onDayChanged(self):
         if self._watered and self._crop and self._crop.growTime > self._growTime:
             self._growTime += 1
 

@@ -52,8 +52,8 @@ class Sprite(pygame.sprite.Sprite):
         else:
             raise ValueError("Unrecognized direction %s" % direction)
 
-    def use_tool(self, tool):
+    def useTool(self, tool):
         return False
 
-    def interact(self, held_item):
+    def interact(self, heldItem):
         return False

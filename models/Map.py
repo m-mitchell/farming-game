@@ -22,7 +22,7 @@ class Map(object):
         self._bgColor = None
         self._layers = []
         self._objects = pygame.sprite.RenderPlain()
-        self.load_map()
+        self.loadMap()
 
 
     def render(self):
@@ -38,81 +38,81 @@ class Map(object):
 
         self._surface.blit(temp, (0,0))
 
-    def is_walkable(self, x, y):
+    def isWalkable(self, x, y):
         # Prevent walking off the map edge.
         if x < 0 or y < 0 or x == self.width or y == self.height:
             return False
 
         walkable = True
         for layer in self._layers:
-            walkable = walkable and layer.is_walkable(x, y)
+            walkable = walkable and layer.isWalkable(x, y)
         return walkable
 
-    def interact(self, held_item, x, y):
+    def interact(self, heldItem, x, y):
         if x < 0 or y < 0 or x == self.width or y == self.height:
             return
 
         rect = pygame.Rect(x*config.TILE_SIZE, y*config.TILE_SIZE, config.TILE_SIZE, config.TILE_SIZE)
         for obj in self._objects.sprites():
             if obj.rect.colliderect(rect):
-                obj.interact(held_item)
+                obj.interact(heldItem)
                 break
 
-    def use_tool(self, tool, x, y):
+    def useTool(self, tool, x, y):
         if x < 0 or y < 0 or x == self.width or y == self.height:
             return
 
         rect = pygame.Rect(x*config.TILE_SIZE, y*config.TILE_SIZE, config.TILE_SIZE, config.TILE_SIZE)
         for obj in self._objects.sprites():
             if obj.rect.colliderect(rect):
-                obj.use_tool(tool)
+                obj.useTool(tool)
                 break
 
-    def load_map(self):
-        tmx_data = load_pygame(self._filename)
+    def loadMap(self):
+        tmxData = load_pygame(self._filename)
 
-        self.size = tmx_data.width * tmx_data.tilewidth, tmx_data.height * tmx_data.tileheight
-        self.width = tmx_data.width
-        self.height = tmx_data.height
-        self.tileSize = tmx_data.tilewidth
+        self.size = tmxData.width * tmxData.tilewidth, tmxData.height * tmxData.tileheight
+        self.width = tmxData.width
+        self.height = tmxData.height
+        self.tileSize = tmxData.tilewidth
 
-        if tmx_data.background_color:
-            self._bgColor = tmx_data.background_color
+        if tmxData.background_color:
+            self._bgColor = tmxData.background_color
 
         # iterate over all the visible layers and create a map layer for each.
-        for layer in tmx_data.visible_layers:
+        for layer in tmxData.visible_layers:
             if isinstance(layer, TiledTileLayer):
-                self._layers.append(TileLayer(tmx_data, layer))
+                self._layers.append(TileLayer(tmxData, layer))
 
             elif isinstance(layer, TiledObjectGroup):
-                obj_factory = ObjectFactory(tmx_data)
+                objFactory = ObjectFactory(tmxData)
                 for obj in layer:
-                    sprite = obj_factory.construct(obj)
+                    sprite = objFactory.construct(obj)
                     self._objects.add(sprite)
 
 class ObjectFactory(object):
-    def __init__(self, tmx_data):
+    def __init__(self, tmxData):
         pass
 
-    def construct(self, tmx_obj):
+    def construct(self, tmxObj):
         kwargs = {}
-        module = importlib.import_module("models.%s"%tmx_obj.type)
-        cls = getattr(module, tmx_obj.type)
-        obj = cls((tmx_obj.x/config.TILE_SIZE, tmx_obj.y/config.TILE_SIZE + 1), **kwargs)
+        module = importlib.import_module("models.%s"%tmxObj.type)
+        cls = getattr(module, tmxObj.type)
+        obj = cls((tmxObj.x/config.TILE_SIZE, tmxObj.y/config.TILE_SIZE + 1), **kwargs)
 
         return obj
 
 class TileLayer(object):
-    def __init__(self, tmx_data, tmx_layer):
-        self._name = tmx_layer.name
+    def __init__(self, tmxData, tmxLayer):
+        self._name = tmxLayer.name
         self._tiles = {}
-        self._height = tmx_data.height
-        self._width = tmx_data.width
-        self._tilewidth = tmx_data.tilewidth
-        self._tileheight = tmx_data.tileheight
+        self._height = tmxData.height
+        self._width = tmxData.width
+        self._tilewidth = tmxData.tilewidth
+        self._tileheight = tmxData.tileheight
 
-        for x, y, gid in tmx_layer:
-            tile = tmx_data.get_tile_image_by_gid(gid)
+        for x, y, gid in tmxLayer:
+            tile = tmxData.get_tile_image_by_gid(gid)
             if tile:
                 if x not in self._tiles.keys():
                     self._tiles[x] = {}
@@ -127,7 +127,7 @@ class TileLayer(object):
                 surface.blit(tile, (x * self._tilewidth, y * self._tileheight))
         return surface
 
-    def is_walkable(self, x, y):
+    def isWalkable(self, x, y):
         if self._name != 'collision':
             return True
         

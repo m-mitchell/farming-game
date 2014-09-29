@@ -61,11 +61,11 @@ class PlayerCharacter(Mob):
             self.currentTool = item
 
     def interact(self, map):
-        target_pos = self._getCoordinates(self.pos, self._direction)
-        map.interact(None, *target_pos)
+        targetPos = self._getCoordinates(self.pos, self._direction)
+        map.interact(None, *targetPos)
 
     def useTool(self, map):
-        target_pos = self._getCoordinates(self.pos, self._direction)
+        targetPos = self._getCoordinates(self.pos, self._direction)
 
         if self.currentTool:
-            map.use_tool(self.currentTool, *target_pos)
+            map.useTool(self.currentTool, *targetPos)

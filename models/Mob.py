@@ -98,17 +98,17 @@ class Mob(pygame.sprite.Sprite):
         if self.walkTimer > 0:
             self.walkTimer-=1
 
-    def move(self, current_map, direction):
+    def move(self, currentMap, direction):
         if self.walkTimer > 0:
             return
         self.walkTimer=config.WALK_TIMER
 
 
-        target_pos = self._getCoordinates(self.pos, direction)
-        if not current_map.is_walkable(*target_pos):
+        targetPos = self._getCoordinates(self.pos, direction)
+        if not currentMap.isWalkable(*targetPos):
             return
 
-        self.pos = target_pos
+        self.pos = targetPos
 
         self._direction = direction
         self._updateRect()

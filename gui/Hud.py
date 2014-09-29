@@ -12,7 +12,6 @@ class Hud(object):
         self.surface = surface
         self.player = player
         self.font = pygame.font.Font(self.FONT_FACE, self.FONT_SIZE)
-        self.cursorIndex = 0
 
     def render(self):
         lines = []
