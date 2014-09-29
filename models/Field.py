@@ -18,10 +18,10 @@ class Field():
         self._height = height
 
         self._plots = []
-        for i in range(0, width):
+        """for i in range(0, width):
             self._plots.append([])
             for j in range(0, height):
-                self._plots[i].append(plot.Plot())
+                self._plots[i].append(plot.Plot())"""
 
         # Add an event handler for when the day changes.
         gameTime = gt.GameTime.Instance()

@@ -3,9 +3,6 @@
  <tileset firstgid="1" name="ground" tilewidth="32" tileheight="32">
   <image source="../../media/images/tiles/ground.png" width="96" height="32"/>
  </tileset>
- <tileset firstgid="4" name="bed" tilewidth="32" tileheight="32">
-  <image source="../../media/images/furniture/bed.png" width="32" height="64"/>
- </tileset>
  <layer name="ground" width="20" height="15">
   <properties>
    <property name="z-index" value="0"/>
@@ -14,19 +11,18 @@
    eJxjZGBgYBzFo3gUj+IhgAHGRgEt
   </data>
  </layer>
- <layer name="ground_objects" width="20" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYCAMmPBgcsCoecPbPGoDZjx41LyRZR4A/g8A9g==
-  </data>
- </layer>
  <layer name="collision" width="20" height="15">
   <properties>
    <property name="z-index" value="10"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2B4AhYqm8dKZfNGAekAABOUAAo=
+   eJxjYBgFo2AUjIKhAQAEsAAB
   </data>
  </layer>
+ <objectgroup name="objects" width="20" height="15">
+  <object name="Bed" type="Bed" x="64" y="160" width="32" height="64"/>
+  <object name="Plot" type="Plot" x="288" y="32" width="32" height="32"/>
+ </objectgroup>
  <layer name="overhead" width="20" height="15">
   <properties>
    <property name="z-index" value="20"/>

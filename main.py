@@ -13,7 +13,7 @@ from controllers.MainMenu import MainMenu
 
 
 # Set up some global vars for persistence while we test.
-field = field.Field(2,2)
+#field = field.Field(2,2)
 
 player = PlayerCharacter()
 player.rucksack.add(seed.Seed("strawberrySeed"))

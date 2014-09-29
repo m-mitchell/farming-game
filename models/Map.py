@@ -2,6 +2,7 @@
 Map
 
 """
+import importlib
 
 import pygame
 from pygame.locals import *
@@ -20,6 +21,7 @@ class Map(object):
         self._filename = r'%s\data\maps\%s.tmx' % (config.PROJECT_ROOT, internalName)
         self._bgColor = None
         self._layers = []
+        self._objects = pygame.sprite.RenderPlain()
         self.load_map()
 
 
@@ -30,6 +32,10 @@ class Map(object):
 
         for layer in self._layers:
             temp = layer.render(temp)
+
+        self._objects.update()
+        self._objects.draw(temp)
+
         self._surface.blit(temp, (0,0))
 
     def is_walkable(self, x, y):
@@ -37,11 +43,30 @@ class Map(object):
         if x < 0 or y < 0 or x == self.width or y == self.height:
             return False
 
-
         walkable = True
         for layer in self._layers:
             walkable = walkable and layer.is_walkable(x, y)
         return walkable
+
+    def interact(self, held_item, x, y):
+        if x < 0 or y < 0 or x == self.width or y == self.height:
+            return
+
+        rect = pygame.Rect(x*config.TILE_SIZE, y*config.TILE_SIZE, config.TILE_SIZE, config.TILE_SIZE)
+        for obj in self._objects.sprites():
+            if obj.rect.colliderect(rect):
+                obj.interact(held_item)
+                break
+
+    def use_tool(self, tool, x, y):
+        if x < 0 or y < 0 or x == self.width or y == self.height:
+            return
+
+        rect = pygame.Rect(x*config.TILE_SIZE, y*config.TILE_SIZE, config.TILE_SIZE, config.TILE_SIZE)
+        for obj in self._objects.sprites():
+            if obj.rect.colliderect(rect):
+                obj.use_tool(tool)
+                break
 
     def load_map(self):
         tmx_data = load_pygame(self._filename)
@@ -56,10 +81,28 @@ class Map(object):
 
         # iterate over all the visible layers and create a map layer for each.
         for layer in tmx_data.visible_layers:
-            self._layers.append(MapLayer(tmx_data, layer))
+            if isinstance(layer, TiledTileLayer):
+                self._layers.append(TileLayer(tmx_data, layer))
 
+            elif isinstance(layer, TiledObjectGroup):
+                obj_factory = ObjectFactory(tmx_data)
+                for obj in layer:
+                    sprite = obj_factory.construct(obj)
+                    self._objects.add(sprite)
 
-class MapLayer(object):
+class ObjectFactory(object):
+    def __init__(self, tmx_data):
+        pass
+
+    def construct(self, tmx_obj):
+        kwargs = {}
+        module = importlib.import_module("models.%s"%tmx_obj.type)
+        cls = getattr(module, tmx_obj.type)
+        obj = cls((tmx_obj.x/config.TILE_SIZE, tmx_obj.y/config.TILE_SIZE + 1), **kwargs)
+
+        return obj
+
+class TileLayer(object):
     def __init__(self, tmx_data, tmx_layer):
         self._name = tmx_layer.name
         self._tiles = {}
@@ -68,13 +111,12 @@ class MapLayer(object):
         self._tilewidth = tmx_data.tilewidth
         self._tileheight = tmx_data.tileheight
 
-        if isinstance(tmx_layer, TiledTileLayer):
-            for x, y, gid in tmx_layer:
-                tile = tmx_data.get_tile_image_by_gid(gid)
-                if tile:
-                    if x not in self._tiles.keys():
-                        self._tiles[x] = {}
-                    self._tiles[x][y] = tile
+        for x, y, gid in tmx_layer:
+            tile = tmx_data.get_tile_image_by_gid(gid)
+            if tile:
+                if x not in self._tiles.keys():
+                    self._tiles[x] = {}
+                self._tiles[x][y] = tile
 
     def __str__(self):
         return self._name

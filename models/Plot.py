@@ -7,10 +7,14 @@ This class represents a single tile on a field.
 
 from models.Seed import Seed
 from models.Crop import Crop
+from models.Sprite import Sprite
 
 # Our main Plot class
-class Plot:
-    def __init__(self):
+class Plot(Sprite):
+    def __init__(self, pos):
+        image = "plot"
+        super(Plot, self).__init__(image, pos)
+
         # The constructor. Set up the internal vars.
         self._crop = None
         self._growTime = None

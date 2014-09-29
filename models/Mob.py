@@ -64,8 +64,6 @@ class Mob(pygame.sprite.Sprite):
         elif self._direction == Direction.LEFT:
             self._animation = self._animations[3]
 
-
-
         self.image = self._animation[0]
 
 
@@ -77,6 +75,25 @@ class Mob(pygame.sprite.Sprite):
         heightDifference = (config.MOB_SIZE[1] - config.TILE_SIZE)
         self.rect.y = (self.pos[1] * config.TILE_SIZE) - heightDifference
 
+    def _getCoordinates(self, coordinates, direction):
+        """
+        Get a pair of coordinates that are one square [direction] of [coordinates]
+        """
+        if direction == Direction.UP:
+            return (coordinates[0], coordinates[1]-1)
+
+        elif direction == Direction.DOWN:
+            return (coordinates[0], coordinates[1]+1)
+
+        elif direction == Direction.LEFT:
+            return (coordinates[0]-1, coordinates[1])
+
+        elif direction == Direction.RIGHT:
+            return (coordinates[0]+1, coordinates[1])
+
+        else:
+            raise ValueError("Unrecognized direction %s" % direction)
+
     def update(self):
         if self.walkTimer > 0:
             self.walkTimer-=1
@@ -84,24 +101,10 @@ class Mob(pygame.sprite.Sprite):
     def move(self, current_map, direction):
         if self.walkTimer > 0:
             return
-
         self.walkTimer=config.WALK_TIMER
-        
-        if direction == Direction.UP:
-            target_pos = (self.pos[0], self.pos[1]-1)
 
-        elif direction == Direction.DOWN:
-            target_pos = (self.pos[0], self.pos[1]+1)
 
-        elif direction == Direction.LEFT:
-            target_pos = (self.pos[0]-1, self.pos[1])
-
-        elif direction == Direction.RIGHT:
-            target_pos = (self.pos[0]+1, self.pos[1])
-
-        else:
-            raise ValueError("Unrecognized direction %s" % direction)
-
+        target_pos = self._getCoordinates(self.pos, direction)
         if not current_map.is_walkable(*target_pos):
             return
 

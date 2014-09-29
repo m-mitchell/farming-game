@@ -33,6 +33,12 @@ class Game(BaseController):
                 elif(event.key == pygame.K_c):
                     self.player.unequipTool()
 
+                elif(event.key == pygame.K_LCTRL):
+                    self.player.useTool(self.currentMap)
+
+                elif(event.key == pygame.K_SPACE):
+                    self.player.interact(self.currentMap)
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
             self.player.move(self.currentMap, Direction.UP)
@@ -45,9 +51,6 @@ class Game(BaseController):
 
         elif keys[pygame.K_DOWN]:
             self.player.move(self.currentMap, Direction.DOWN)
-
-
-
 
     def run(self):
         while not self.quit and not self.nextController:

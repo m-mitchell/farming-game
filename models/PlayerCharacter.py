@@ -59,3 +59,13 @@ class PlayerCharacter(Mob):
 
         if type(item) is Seed or type(item) is Tool:
             self.currentTool = item
+
+    def interact(self, map):
+        target_pos = self._getCoordinates(self.pos, self._direction)
+        map.interact(None, *target_pos)
+
+    def useTool(self, map):
+        target_pos = self._getCoordinates(self.pos, self._direction)
+
+        if self.currentTool:
+            map.use_tool(self.currentTool, *target_pos)
