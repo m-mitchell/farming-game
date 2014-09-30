@@ -2,11 +2,14 @@
 Crop
 
 """
+import pygame
 
 import models.GameTime as gt
 
 from models.Item import Item
 from models.Seed import Seed
+
+import models.Config as config
 
 class GrowSpeed:
     FAST = 2
@@ -25,6 +28,8 @@ class Crop(Item):
         if 'regrowTime' in self._rawData:
             self.regrowTime = int(self._rawData['regrowTime'])
 
+        self.spriteChanges = self._rawData['spriteChanges']
+
         self.seasons = {}
         for season, speed in self._rawData['seasons'].items():
             parsedSeason = getattr(gt.Season, season.upper())
@@ -35,5 +40,9 @@ class Crop(Item):
     @property
     def seed(self):
         return Seed(self._rawData['seed'])
+
+    def getFieldImage(self, cropIndex):
+        filename = r'%s\media\images\crops\%s_%s.png' % (config.PROJECT_ROOT, self.internalName, cropIndex)
+        return pygame.image.load(filename)
 
 

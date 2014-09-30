@@ -4,6 +4,7 @@ Plot
 This class represents a single tile of a field. 
 
 """
+import pygame
 
 from models.Seed import Seed
 from models.Tool import Tool
@@ -22,7 +23,7 @@ class Plot(Sprite):
         self._growTime = None
         self._plowed = False
         self._watered = False
-        
+
         super(Plot, self).__init__(image, pos)
 
         # Add an event handler for when the day changes.
@@ -116,3 +117,27 @@ class Plot(Sprite):
             self._animation = self._animations[1]
         else:
             self._animation = self._animations[0]
+
+    def _updateImage(self):
+        super(Plot, self)._updateImage()
+
+        #print(self.image)
+
+        # If we have a crop, we have to superimpose it on top of the plot tile.
+        if self._crop:
+            # Figure out which sprite we should use.
+            cropIndex = 1
+            for index in self._crop.spriteChanges:
+                if index > self._growTime:
+                    break
+                cropIndex += 1
+
+            # Get the actual image
+            cropImage = self._crop.getFieldImage(cropIndex)
+
+            # Create a temp surface and blit the plot and crop onto it.
+            # If we blit the crop directly on the plot it seems to get stuck there forever ;(
+            temp = pygame.Surface((self.width, self.height))
+            temp.blit(self.image, (0,0))
+            temp.blit(cropImage, (0,0))
+            self.image = temp

@@ -11,6 +11,8 @@
 		"winter": "none"
 	},
 
+	"spriteChanges" : [ 5 ],
+
 	"seed": "turnipSeed",
 
 	"shipPrice": 30,

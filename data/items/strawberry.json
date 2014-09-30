@@ -12,6 +12,8 @@
 		"winter": "none"
 	},
 
+	"spriteChanges" : [ 5, 10 ],
+
 	"seed": "strawberrySeed",
 
 	"shipPrice": 30,

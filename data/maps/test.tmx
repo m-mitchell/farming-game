@@ -22,6 +22,29 @@
  <objectgroup name="objects" width="20" height="15">
   <object name="Bed" type="Bed" x="64" y="160" width="32" height="64"/>
   <object name="Plot" type="Plot" x="288" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="320" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="352" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="384" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="416" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="416" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="448" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="448" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="448" y="96" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="416" y="96" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="384" y="96" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="448" y="128" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="416" y="128" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="384" y="128" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="352" y="128" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="384" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="352" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="352" y="96" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="320" y="128" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="320" y="96" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="320" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="288" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="288" y="96" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="288" y="128" width="32" height="32"/>
  </objectgroup>
  <layer name="overhead" width="20" height="15">
   <properties>
