@@ -15,7 +15,8 @@ class ShippingBin(Sprite):
         super(ShippingBin, self).__init__(image, pos, collision=True, height=config.TILE_SIZE*2, width=config.TILE_SIZE*2)
 
     def interact(self, item):
-        self.__ship(item)
+        if item is not None:
+            self.__ship(item)
 
     def __ship(self, item):
         rucksack = getPlayer().rucksack

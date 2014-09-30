@@ -24,7 +24,17 @@ class Rucksack(object):
     def remove(self, item):
         if self._holder.currentTool == item:
             self._holder.nextTool()
+
+        if self._holder.currentItem == item:
+            self._holder.nextItem()
+
         self._contents.remove(item)
+
+        if self._holder.currentTool == item:
+            self._holder.unequipTool()
+            
+        if self._holder.currentItem == item:
+            self._holder.unequipItem()
 
     def search(self, cls, attrs):
         for item in self._contents:
