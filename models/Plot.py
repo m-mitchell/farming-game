@@ -16,13 +16,14 @@ from models.PlayerCharacter import getPlayer
 class Plot(Sprite):
     def __init__(self, pos):
         image = "plot"
-        super(Plot, self).__init__(image, pos)
 
         # The constructor. Set up the internal vars.
         self._crop = None
         self._growTime = None
         self._plowed = False
         self._watered = False
+        
+        super(Plot, self).__init__(image, pos)
 
         # Add an event handler for when the day changes.
         gameTime = GameTime.Instance()
@@ -107,3 +108,11 @@ class Plot(Sprite):
             return "%s (growth: %d) %s %s" % (self._crop.displayName, self._growTime, plowed, watered)
         else:
             return "Empty %s" % (plowed)
+
+    def _updateAnimation(self):
+        if self._plowed and self._watered:
+            self._animation = self._animations[2]
+        elif self._plowed:
+            self._animation = self._animations[1]
+        else:
+            self._animation = self._animations[0]
