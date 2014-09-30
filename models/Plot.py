@@ -80,7 +80,8 @@ class Plot(Sprite):
 
         # TODO could add some logic for quality/quantity of harvest here
         rucksack = getPlayer().rucksack
-        rucksack.add(self._crop)
+        if not rucksack.add(self._crop):
+            return None
 
         if self._crop.regrows:
             self._crop = Crop(self._crop.internalName)

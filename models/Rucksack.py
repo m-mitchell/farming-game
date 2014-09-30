@@ -15,7 +15,7 @@ class Rucksack(object):
         self._contents = []
 
     def add(self, item):
-        if self._size == len(self._contents):
+        if self._size <= len(self._contents):
             return False
 
         self._contents.append(item)
