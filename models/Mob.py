@@ -15,13 +15,40 @@ class Direction:
     LEFT = 4
 
 class Mob(Sprite):
-    def __init__(self, sprite, pos=(0,0), height=config.MOB_SIZE[1], width=config.MOB_SIZE[0], collision=False):
+    def __init__(self, sprite, pos=(0,0), height=config.MOB_SIZE[1], width=config.MOB_SIZE[0], speed=config.ANIM_MEDIUM, collision=False):
         self._direction = Direction.DOWN
+
         self.walkTimer=config.WALK_TIMER
+        self._walking = False
 
-        super(Mob, self).__init__(sprite, pos, height, width, collision)
+        super(Mob, self).__init__(sprite, pos, height, width, speed, collision)
 
-    def _updateImage(self):
+    def update(self):
+        super(Mob, self).update()
+
+        if self.walkTimer > 0:
+            self.walkTimer-=1
+        else:
+            self._walking = False
+
+    def move(self, currentMap, direction):
+        if self.walkTimer > 0:
+            return
+        self.walkTimer=config.WALK_TIMER
+        self._walking=True
+
+
+        targetPos = self._getCoordinates(self.pos, direction)
+        if not currentMap.isWalkable(*targetPos):
+            return
+
+        self.pos = targetPos
+
+        self._direction = direction
+        self._updateRect()
+        self._updateImage()
+
+    def _updateAnimation(self):
         # Never eat shredded wheat. 
         if self._direction == Direction.UP:
             self._animation = self._animations[0]
@@ -35,24 +62,16 @@ class Mob(Sprite):
         elif self._direction == Direction.LEFT:
             self._animation = self._animations[3]
 
-        self.image = self._animation[0]
+    def _updateImage(self):
+        if self._animIndex is None:
+            self._animIndex = -1
 
-    def update(self):
-        if self.walkTimer > 0:
-            self.walkTimer-=1
+        if self._walking:
+            self._animTimer-=1
+            if self._animTimer <= 0:
+                self._animIndex = (self._animIndex + 1) % len(self._animation)
+                self._animTimer = self._animSpeed
+        else:
+            self._animIndex = 0
 
-    def move(self, currentMap, direction):
-        if self.walkTimer > 0:
-            return
-        self.walkTimer=config.WALK_TIMER
-
-
-        targetPos = self._getCoordinates(self.pos, direction)
-        if not currentMap.isWalkable(*targetPos):
-            return
-
-        self.pos = targetPos
-
-        self._direction = direction
-        self._updateRect()
-        self._updateImage()
+        self.image = self._animation[self._animIndex]

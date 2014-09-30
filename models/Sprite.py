@@ -30,9 +30,19 @@ class Sprite(pygame.sprite.Sprite):
         self._spritesheet = pygame.image.load(filename)
         self._loadSprites()
 
+        self.update()
+
+    def update(self):
+        self._updateAnimation()
         self._updateImage()
-        self.rect = self.image.get_rect()
         self._updateRect()
+
+    def useTool(self, tool):
+        return False
+
+    def interact(self, heldItem):
+        return False
+
 
     def _loadSprites(self):
         # Figure out the height and width of the spritesheet (in sprites)
@@ -51,12 +61,12 @@ class Sprite(pygame.sprite.Sprite):
                 animation.append(sprite)
             self._animations.append(animation)
 
-    def _updateImage(self):
+    def _updateAnimation(self):
         self._animation = self._animations[0]
 
+    def _updateImage(self):
         if self._animIndex is None:
             self._animIndex = -1
-
 
         self._animTimer-=1
         if self._animTimer <= 0:
@@ -65,10 +75,10 @@ class Sprite(pygame.sprite.Sprite):
 
         self.image = self._animation[self._animIndex]
 
-    def update(self):
-        self._updateImage()
-
     def _updateRect(self):
+        if not hasattr(self,'rect'):
+            self.rect = self.image.get_rect()
+
         self.rect.x = self.pos[0] * config.TILE_SIZE
 
         # We want the bottom of the sprite to touch the bottom of the tile.
@@ -94,9 +104,3 @@ class Sprite(pygame.sprite.Sprite):
 
         else:
             raise ValueError("Unrecognized direction %s" % direction)
-
-    def useTool(self, tool):
-        return False
-
-    def interact(self, heldItem):
-        return False
