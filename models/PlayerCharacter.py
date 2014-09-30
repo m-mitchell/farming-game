@@ -24,11 +24,16 @@ class PlayerCharacter(Mob):
         self.rucksack = Rucksack(self)
         self.money = 100
         self.currentTool = None
+        self.currentItem = None
 
         self.rucksack.add(Tool("wateringCan"))
         self.rucksack.add(Tool("hoe"))
         self.rucksack.add(Seed("strawberrySeed"))
         self.rucksack.add(Seed("strawberrySeed"))
+        self.rucksack.add(Seed("strawberrySeed"))
+        self.rucksack.add(Seed("strawberrySeed"))
+        self.rucksack.add(Seed("turnipSeed"))
+        self.rucksack.add(Seed("turnipSeed"))
         self.rucksack.add(Seed("turnipSeed"))
         self.rucksack.add(Seed("turnipSeed"))
 
@@ -68,9 +73,38 @@ class PlayerCharacter(Mob):
         if type(item) is Seed or type(item) is Tool:
             self.currentTool = item
 
+    def nextItem(self):
+        inv = []
+        currItemIndex = -1
+        for i, item in enumerate(self.rucksack):
+            if type(item) is not Seed and type(item) is not Tool:
+                inv.append(item)
+                
+            if item is self.currentItem:
+                currItemIndex = i
+
+        if len(inv):
+            self.currentItem = inv[(currItemIndex+1) % len(inv)]
+
+    def previousItem(self):
+        inv = []
+        currItemIndex = -1
+        for i, item in enumerate(self.rucksack):
+            if type(item) is not Seed and type(item) is not Tool:
+                inv.append(item)
+                
+            if item is self.currentItem:
+                currItemIndex = i
+
+        if len(inv):
+            self.currentItem = inv[(currItemIndex-1) % len(inv)]
+
+    def unequipItem(self):
+        self.currentItem = None
+
     def interact(self, map):
         targetPos = self._getCoordinates(self.pos, self._direction)
-        map.interact(None, *targetPos)
+        map.interact(self.currentItem, *targetPos)
 
     def useTool(self, map):
         targetPos = self._getCoordinates(self.pos, self._direction)

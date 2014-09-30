@@ -14,10 +14,8 @@ class Bed(Sprite):
         super(Bed, self).__init__(image, pos, collision=True, height=config.TILE_SIZE*2)
 
     def interact(self, item):
-        if item is None:
-            self.__sleep()
+        self.__sleep()
 
     def __sleep(self):
-        print("Sleeping...")
         gameTime = GameTime.Instance()
         gameTime.advanceDay()

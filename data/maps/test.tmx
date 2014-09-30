@@ -45,6 +45,7 @@
   <object name="Plot" type="Plot" x="288" y="64" width="32" height="32"/>
   <object name="Plot" type="Plot" x="288" y="96" width="32" height="32"/>
   <object name="Plot" type="Plot" x="288" y="128" width="32" height="32"/>
+  <object name="ShippingBin" type="ShippingBin" x="288" y="224" width="64" height="64"/>
  </objectgroup>
  <layer name="overhead" width="20" height="15">
   <properties>

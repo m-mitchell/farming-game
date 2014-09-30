@@ -35,6 +35,15 @@ class Game(BaseController):
                 elif(event.key == pygame.K_c):
                     self.player.unequipTool()
 
+                if(event.key == pygame.K_a):
+                    self.player.previousItem()
+
+                elif(event.key == pygame.K_s):
+                    self.player.nextItem()
+
+                elif(event.key == pygame.K_d):
+                    self.player.unequipItem()
+
                 elif(event.key == pygame.K_LCTRL):
                     self.player.useTool(self.currentMap)
 

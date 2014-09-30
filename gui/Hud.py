@@ -20,11 +20,20 @@ class Hud(object):
         gameTime = GameTime.Instance()
         lines.append(gameTime.getFormattedDateTime())
 
+        # Render the player's $$$
+        lines.append("Money: %s" % getPlayer().money)
+
         # Render the current tool
         toolText = "None"
         if getPlayer().currentTool:
             toolText = getPlayer().currentTool.displayName
         lines.append("Tool: " + toolText)
+
+        # Render the current held item
+        itemText = "None"
+        if getPlayer().currentItem:
+            itemText = getPlayer().currentItem.displayName
+        lines.append("Held Item: " + itemText)
 
 
         for i, line in enumerate(lines):
