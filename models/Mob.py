@@ -37,6 +37,8 @@ class Mob(Sprite):
         self.walkTimer=config.WALK_TIMER
         self._walking=True
 
+        # Even if the target square isn't walkable, we can still turn in that direction.
+        self._direction = direction
 
         targetPos = self._getCoordinates(self.pos, direction)
         if not currentMap.isWalkable(*targetPos):
@@ -44,7 +46,6 @@ class Mob(Sprite):
 
         self.pos = targetPos
 
-        self._direction = direction
         self._updateRect()
         self._updateImage()
 
