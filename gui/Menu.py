@@ -1,16 +1,20 @@
 import pygame
-from gui.BaseWindow import BaseWindow
+from gui.BaseWindow import BaseWindow, HALIGN_CENTER, VALIGN_CENTER
+import models.Config as config
+
+DEFAULT_HEIGHT = config.SCREEN_HEIGHT
+DEFAULT_WIDTH = config.SCREEN_WIDTH / 5
 
 class Menu(BaseWindow):
 
-    def __init__(self, options, surface):
-        super(Menu, self).__init__(surface)
+    def __init__(self, options, surface, width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, halign=HALIGN_CENTER, valign=VALIGN_CENTER):
         self.options = options
         self.cursorIndex = 0
 
-    def render(self):
-        super(Menu, self).render()
 
+        super(Menu, self).__init__(surface, width, height, halign, valign)
+
+    def _renderContent(self):
         # Render the menu cursor
         renderedText = self.font.render(">", 1, self.FONT_COLOR)
         dest = (self.MARGIN, self.MARGIN + self.cursorIndex*self.LINE_HEIGHT)

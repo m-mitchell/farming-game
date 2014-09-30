@@ -6,11 +6,9 @@ from gui.BaseWindow import BaseWindow
 class Hud(BaseWindow):
 
     def __init__(self, surface):
-        super(Hud, self).__init__(surface)
+        super(Hud, self).__init__(surface, width=180, height=100)
 
-    def render(self):
-        super(Hud, self).render()
-
+    def _renderContent(self):
         lines = []
 
         # Render the date/time info

@@ -2,6 +2,7 @@ import pygame
 from controllers.BaseController import BaseController
 from controllers.Game import Game
 from gui.Menu import Menu
+import models.Config as config
 
 class MainMenu(BaseController):
     BACKGROUND_COLOR = (128,128,128)
@@ -13,7 +14,7 @@ class MainMenu(BaseController):
             ('start', 'Start'),
             ('quit', 'Quit')
         ]
-        self.menu = Menu(options, self.background)
+        self.menu = Menu(options, self.background, height=150)
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)
