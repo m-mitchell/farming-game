@@ -1,19 +1,16 @@
 import pygame
 from models.GameTime import GameTime
 from models.PlayerCharacter import getPlayer
+from gui.BaseWindow import BaseWindow
 
-class Hud(object):
-    FONT_SIZE = 18
-    FONT_FACE = None
-    FONT_COLOR = (10,10,10)
-    LINE_HEIGHT = FONT_SIZE * 1.2
-    MARGIN = 10
+class Hud(BaseWindow):
 
     def __init__(self, surface):
-        self.surface = surface
-        self.font = pygame.font.Font(self.FONT_FACE, self.FONT_SIZE)
+        super(Hud, self).__init__(surface)
 
     def render(self):
+        super(Hud, self).render()
+
         lines = []
 
         # Render the date/time info

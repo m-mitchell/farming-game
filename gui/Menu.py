@@ -1,19 +1,16 @@
 import pygame
+from gui.BaseWindow import BaseWindow
 
-class Menu(object):
-    FONT_SIZE = 18
-    FONT_FACE = None
-    FONT_COLOR = (10,10,10)
-    LINE_HEIGHT = FONT_SIZE * 1.2
-    MARGIN = 10
+class Menu(BaseWindow):
 
     def __init__(self, options, surface):
+        super(Menu, self).__init__(surface)
         self.options = options
-        self.surface = surface
-        self.font = pygame.font.Font(self.FONT_FACE, self.FONT_SIZE)
         self.cursorIndex = 0
 
     def render(self):
+        super(Menu, self).render()
+
         # Render the menu cursor
         renderedText = self.font.render(">", 1, self.FONT_COLOR)
         dest = (self.MARGIN, self.MARGIN + self.cursorIndex*self.LINE_HEIGHT)

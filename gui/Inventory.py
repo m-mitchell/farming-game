@@ -1,19 +1,16 @@
 import pygame
 from models.GameTime import GameTime
 from models.PlayerCharacter import getPlayer
+from gui.BaseWindow import BaseWindow
 
-class Inventory(object):
-    FONT_SIZE = 18
-    FONT_FACE = None
-    FONT_COLOR = (10,10,10)
-    LINE_HEIGHT = FONT_SIZE * 1.2
-    MARGIN = 10
+class Inventory(BaseWindow):
 
     def __init__(self, surface):
-        self.surface = surface
-        self.font = pygame.font.Font(self.FONT_FACE, self.FONT_SIZE)
+        super(Inventory, self).__init__(surface)
 
     def render(self):
+        super(Inventory, self).render()
+
         lines = []
 
         # Render the date/time info
