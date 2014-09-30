@@ -8,8 +8,9 @@ This class represents a player character's inventory.
 
 # Our main Rucksack class
 class Rucksack(object):
-    def __init__(self, size=8):
+    def __init__(self, holder, size=8):
         # The constructor. Set up the internal vars.
+        self._holder = holder
         self._size = size
         self._contents = []
 
@@ -21,6 +22,8 @@ class Rucksack(object):
         return True
 
     def remove(self, item):
+        if self._holder.currentTool == item:
+            self._holder.nextTool()
         self._contents.remove(item)
 
     def search(self, cls, attrs):

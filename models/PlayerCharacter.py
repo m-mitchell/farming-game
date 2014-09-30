@@ -21,7 +21,7 @@ class PlayerCharacter(Mob):
         # The constructor. Set up the internal vars.
         super(PlayerCharacter, self).__init__("player")
 
-        self.rucksack = Rucksack()
+        self.rucksack = Rucksack(self)
         self.money = 100
         self.currentTool = None
 
