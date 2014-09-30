@@ -37,25 +37,6 @@ class Mob(Sprite):
 
         self.image = self._animation[0]
 
-    def _getCoordinates(self, coordinates, direction):
-        """
-        Get a pair of coordinates that are one square [direction] of [coordinates]
-        """
-        if direction == Direction.UP:
-            return (coordinates[0], coordinates[1]-1)
-
-        elif direction == Direction.DOWN:
-            return (coordinates[0], coordinates[1]+1)
-
-        elif direction == Direction.LEFT:
-            return (coordinates[0]-1, coordinates[1])
-
-        elif direction == Direction.RIGHT:
-            return (coordinates[0]+1, coordinates[1])
-
-        else:
-            raise ValueError("Unrecognized direction %s" % direction)
-
     def update(self):
         if self.walkTimer > 0:
             self.walkTimer-=1

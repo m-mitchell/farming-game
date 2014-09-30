@@ -14,13 +14,17 @@ class Direction:
     LEFT = 4
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, sprite, pos, height=config.TILE_SIZE, width=config.TILE_SIZE, collision=False):
+    def __init__(self, sprite, pos, height=config.TILE_SIZE, width=config.TILE_SIZE, speed=config.ANIM_MEDIUM, collision=False):
         super(Sprite, self).__init__()
 
         self.pos = pos
         self.height = height
         self.width = width
         self.collision=collision
+
+        self._animIndex = None
+        self._animSpeed = speed
+        self._animTimer = speed
 
         filename = r'%s\media\images\sprites\%s.png' % (config.PROJECT_ROOT, sprite)
         self._spritesheet = pygame.image.load(filename)
@@ -49,7 +53,20 @@ class Sprite(pygame.sprite.Sprite):
 
     def _updateImage(self):
         self._animation = self._animations[0]
-        self.image = self._animation[0]
+
+        if self._animIndex is None:
+            self._animIndex = -1
+
+
+        self._animTimer-=1
+        if self._animTimer <= 0:
+            self._animIndex = (self._animIndex + 1) % len(self._animation)
+            self._animTimer = self._animSpeed
+
+        self.image = self._animation[self._animIndex]
+
+    def update(self):
+        self._updateImage()
 
     def _updateRect(self):
         self.rect.x = self.pos[0] * config.TILE_SIZE
