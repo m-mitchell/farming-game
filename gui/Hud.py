@@ -6,9 +6,9 @@ from gui.BaseWindow import BaseWindow
 class Hud(BaseWindow):
 
     def __init__(self, surface):
-        super(Hud, self).__init__(surface, width=180, height=100)
+        super(Hud, self).__init__(surface)
 
-    def _renderContent(self):
+    def _renderContent(self, surface):
         lines = []
 
         # Render the date/time info
@@ -33,5 +33,5 @@ class Hud(BaseWindow):
 
         for i, line in enumerate(lines):
             renderedText = self.font.render(line, 1, self.FONT_COLOR)
-            dest = (self.MARGIN, self.MARGIN + i*self.LINE_HEIGHT)
-            self.surface.blit(renderedText, dest)
+            dest = (self.HMARGIN, self.VMARGIN + i*self.LINE_HEIGHT)
+            surface.blit(renderedText, dest)

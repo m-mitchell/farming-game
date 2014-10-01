@@ -14,7 +14,7 @@ class MainMenu(BaseController):
             ('start', 'Start'),
             ('quit', 'Quit')
         ]
-        self.menu = Menu(options, self.background, height=150)
+        self.menu = Menu(options, self.background)
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)

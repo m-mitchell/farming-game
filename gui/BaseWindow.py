@@ -10,17 +10,17 @@ VALIGN_TOP = 0
 VALIGN_CENTER = 1
 VALIGN_BOTTOM = 2
 
-WIDTH_AUTO = "auto"
-HEIGHT_AUTO = "auto"
+SIZE_AUTO = "auto"
 
 class BaseWindow(object):
     FONT_SIZE = 18
     FONT_FACE = None
     FONT_COLOR = (10,10,10)
     LINE_HEIGHT = FONT_SIZE * 1.2
-    MARGIN = 10
+    HMARGIN = 20
+    VMARGIN = 10
 
-    def __init__(self, surface, width, height, halign=HALIGN_LEFT, valign=VALIGN_TOP):
+    def __init__(self, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_LEFT, valign=VALIGN_TOP):
         self._parentSurface = surface
         self.width = width
         self.height = height
@@ -31,24 +31,41 @@ class BaseWindow(object):
 
         self.font = pygame.font.Font(self.FONT_FACE, self.FONT_SIZE)
 
-    def renderContent(self):
-        pass
+    def _renderContent(self, surface):
+        return surface
 
     def render(self):
+
+        # Figure out the size of the content surface.
+        # If we're autosizing, we use the parent surface size to give the content some space to blit on.
+        # We'll crop the surface after.
         parentRect = self._parentSurface.get_rect()
-        width = self.width
-        height = self.height
 
-        if width == WIDTH_AUTO:
-            # TODO
-            pass
+        if self.width == SIZE_AUTO:
+            contentWidth = parentRect.width
+        else:
+            contentWidth = self.width
 
-        if height == HEIGHT_AUTO:
-            # TODO
-            pass
+        if self.height == SIZE_AUTO:
+            contentHeight = parentRect.height
+        else:
+            contentHeight = self.height
 
+        # Render the content.
+        contentSurface = pygame.Surface((contentWidth, contentHeight), flags=pygame.SRCALPHA)
+        self._renderContent(contentSurface)
 
-        self.surface = pygame.Surface((width, height), flags=pygame.SRCALPHA)
+        # Figure out the size of the full window surface.
+        contentRect = contentSurface.get_bounding_rect()
+        if self.width == SIZE_AUTO:
+            width = contentRect.width + self.HMARGIN * 2
+        else:
+            width = self.width
+
+        if self.height == SIZE_AUTO:
+            height = contentRect.height + self.VMARGIN * 2
+        else:
+            height = self.height
 
         # Figure out the left for the window surface
         left = 0
@@ -66,9 +83,10 @@ class BaseWindow(object):
         elif self.valign == VALIGN_CENTER:
             top = parentRect.height/2 - height/2
 
-        # Make the subsurface for the window and fill it
+        # Make the surface for the window and fill it
         # Then blit onto the main surface
+        self.surface = pygame.Surface((width, height), flags=pygame.SRCALPHA)
         self.surface.fill((255, 255, 255, 100))
-        self._renderContent()
+        self.surface.blit(contentSurface, (0,0))
         self._parentSurface.blit(self.surface, (left, top))
 
