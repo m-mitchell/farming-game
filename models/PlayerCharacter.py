@@ -17,9 +17,9 @@ def setPlayer(player):
 
 # Our main PlayerCharacter class
 class PlayerCharacter(Mob):
-    def __init__(self):
+    def __init__(self, pos=(0,0)):
         # The constructor. Set up the internal vars.
-        super(PlayerCharacter, self).__init__("player")
+        super(PlayerCharacter, self).__init__("player", pos=pos)
 
         self.rucksack = Rucksack(self)
         self.money = 100

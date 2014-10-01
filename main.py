@@ -16,7 +16,7 @@ def main():
     pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
     pygame.display.set_caption("Farming Game")
 
-    player = PlayerCharacter()
+    player = PlayerCharacter(pos=(2,2))
     setPlayer(player)
 
     controller = MainMenu
