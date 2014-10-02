@@ -105,7 +105,9 @@ class ObjectFactory(object):
         kwargs = {}
         module = importlib.import_module("models.%s"%tmxObj.type)
         cls = getattr(module, tmxObj.type)
-        obj = cls((tmxObj.x/config.TILE_SIZE, tmxObj.y/config.TILE_SIZE + 1), **kwargs)
+        xPos = tmxObj.x/config.TILE_SIZE
+        yPos = (tmxObj.y + tmxObj.height) / config.TILE_SIZE - 1
+        obj = cls((xPos, yPos), **kwargs)
 
         return obj
 
