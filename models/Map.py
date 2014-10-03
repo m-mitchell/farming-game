@@ -55,6 +55,16 @@ class Map(object):
 
         return walkable
 
+    def walkTrigger(self, x, y):
+        if x < 0 or y < 0 or x == self.width or y == self.height:
+            return
+
+        rect = pygame.Rect(x*config.TILE_SIZE, y*config.TILE_SIZE, config.TILE_SIZE, config.TILE_SIZE)
+        for obj in self._objects.sprites():
+            if obj.rect.colliderect(rect):
+                obj.walkTrigger()
+                break
+
     def interact(self, heldItem, x, y):
         if x < 0 or y < 0 or x == self.width or y == self.height:
             return
@@ -102,12 +112,11 @@ class ObjectFactory(object):
         pass
 
     def construct(self, tmxObj):
-        kwargs = {}
         module = importlib.import_module("models.%s"%tmxObj.type)
         cls = getattr(module, tmxObj.type)
         xPos = tmxObj.x/config.TILE_SIZE
         yPos = (tmxObj.y + tmxObj.height) / config.TILE_SIZE - 1
-        obj = cls((xPos, yPos), **kwargs)
+        obj = cls((xPos, yPos), **tmxObj.properties)
 
         return obj
 

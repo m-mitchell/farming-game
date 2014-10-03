@@ -111,3 +111,6 @@ class PlayerCharacter(Mob):
 
         if self.currentTool:
             map.useTool(self.currentTool, *targetPos)
+
+    def walkTrigger(self, map):
+        map.walkTrigger(*self.pos)

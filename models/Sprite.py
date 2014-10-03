@@ -44,6 +44,9 @@ class Sprite(pygame.sprite.Sprite):
         return False
 
 
+    def walkTrigger(self):
+        return False
+
     def _loadSprites(self):
         # Figure out the height and width of the spritesheet (in sprites)
         spritesheetRect = self._spritesheet.get_rect()

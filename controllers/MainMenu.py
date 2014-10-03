@@ -52,7 +52,7 @@ class MainMenu(BaseController):
             pygame.display.flip()
 
         if not self.quit:
-            return self.nextController
+            return self.nextController()
 
         return None
 

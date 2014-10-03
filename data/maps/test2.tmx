@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="ground" tilewidth="32" tileheight="32">
+  <image source="../../media/images/tiles/ground.png" width="96" height="32"/>
+ </tileset>
+ <layer name="ground" width="20" height="15">
+  <properties>
+   <property name="z-index" value="0"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
+  </data>
+ </layer>
+ <layer name="collision" width="20" height="15">
+  <properties>
+   <property name="z-index" value="10"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYKIyphYg1TxCbiHFPGL0k2oeIfGBNA+XWdQyj9L4IEYfJemFFHtINYcS8/DlsYHOb8Sahy18yC1bANZ3AMU=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="20" height="15">
+  <object name="Teleport" type="Teleport" x="128" y="448" width="32" height="32">
+   <properties>
+    <property name="target" value="test"/>
+    <property name="targetX" value="4"/>
+    <property name="targetY" value="1"/>
+   </properties>
+  </object>
+  <object name="Teleport" type="Teleport" x="160" y="448" width="32" height="32">
+   <properties>
+    <property name="target" value="test"/>
+    <property name="targetX" value="5"/>
+    <property name="targetY" value="1"/>
+   </properties>
+  </object>
+  <object name="Plot" type="Plot" x="64" y="352" width="32" height="32"/>
+ </objectgroup>
+ <layer name="overhead" width="20" height="15">
+  <properties>
+   <property name="z-index" value="20"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+</map>

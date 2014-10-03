@@ -14,13 +14,19 @@ class Game(BaseController):
         super().__init__()
 
         self.player = getPlayer()
-        self.currentMap = Map(self.background, 'test')
+
+        self.maps = {}
+        self.setMap('test')
+
+        print(self.currentMap)
+
         self.spriteList = pygame.sprite.RenderPlain([self.player,])
         self.hud = Hud(self.background)
         self.inventory = Inventory(self.background)
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit = True
@@ -62,6 +68,14 @@ class Game(BaseController):
 
         elif keys[pygame.K_DOWN]:
             self.player.move(self.currentMap, Direction.DOWN)
+
+        self.player.walkTrigger(self.currentMap)
+
+    def setMap(self, mapName):
+        if mapName not in self.maps.keys():
+            self.maps[mapName] = Map(self.background, mapName)
+
+        self.currentMap = self.maps[mapName]
 
     def run(self):
         while not self.quit and not self.nextController:

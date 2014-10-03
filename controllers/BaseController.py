@@ -2,6 +2,15 @@ import pygame
 
 import models.Config as config
 
+def getController():
+    global __current
+    return __current
+
+def setController(controller):
+    global __current
+    __current = controller
+    return controller
+
 class BaseController(object):
     TICK_TIME = config.TICK_TIME
 

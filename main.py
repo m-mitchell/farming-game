@@ -9,6 +9,7 @@ import models.Crop as crop
 
 from models.PlayerCharacter import PlayerCharacter, setPlayer
 from controllers.MainMenu import MainMenu
+from controllers.BaseController import getController, setController
 
 
 def main():
@@ -19,9 +20,10 @@ def main():
     player = PlayerCharacter(pos=(2,2))
     setPlayer(player)
 
-    controller = MainMenu
+    controller = setController(MainMenu())
     while controller:
-        controller = controller().run()
+        controller = controller.run()
+        setController(controller)
 
 
 if __name__=='__main__':
