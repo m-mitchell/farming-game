@@ -7,12 +7,11 @@ This is an abstract class that provides some common functionality for all items
 """
 
 import json
-from abc import ABCMeta
 
 import models.Config as config
 
 # Our main Item class
-class Item(metaclass=ABCMeta):
+class Item():
 
     def __init__(self, internalName):
         # The constructor. Set up the internal vars.
