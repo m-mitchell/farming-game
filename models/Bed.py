@@ -6,6 +6,8 @@ Bed
 from models.Sprite import Sprite
 from models.GameTime import GameTime
 import models.Config as config
+from controllers.BaseController import getController
+from gui.Menu import Menu
 
 # Our main Bed class
 class Bed(Sprite):
@@ -14,7 +16,18 @@ class Bed(Sprite):
         super(Bed, self).__init__(image, pos, collision=True, height=config.TILE_SIZE*2)
 
     def interact(self, item):
-        self.__sleep()
+        options = [
+            ('yes', 'Yes'),
+            ('no', 'No'),
+        ]
+        text = "Are you sure you want to sleep?"
+        menu = Menu(options, None, escape="no", text=text)
+        getController().setMenu(menu, self.handleMenuSelection)
+
+    def handleMenuSelection(self, option):
+        if option == 'yes':
+            self.__sleep()
+        getController().setMenu(None)
 
     def __sleep(self):
         gameTime = GameTime.Instance()

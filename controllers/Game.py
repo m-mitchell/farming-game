@@ -64,8 +64,8 @@ class Game(BaseController):
                         ('quit', 'Quit'),
                         ('cancel', 'Cancel'),
                     ]
-                    self.menu = Menu(options, self.background, escape="cancel")
-                    self.menu.optionSelected.handle(self.handleMenuSelection)
+                    menu = Menu(options, self.background, escape="cancel")
+                    self.setMenu(menu, self.handleMenuSelection)
 
         if self.menu:
             return
@@ -90,6 +90,12 @@ class Game(BaseController):
             self.maps[mapName] = Map(self.background, mapName)
 
         self.currentMap = self.maps[mapName]
+
+    def setMenu(self, menu, handler=None):
+        self.menu = menu
+        if menu:
+            self.menu.optionSelected.handle(handler)
+            self.menu.setSurface(self.background)
 
     def run(self):
         while not self.quit and not self.nextController:

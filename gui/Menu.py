@@ -6,25 +6,35 @@ from util.Event import Event
 class Menu(BaseWindow):
     CURSOR_MARGIN = 5
 
-    def __init__(self, options, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER, escape=None):
+    def __init__(self, options, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER, escape=None, text=None):
         self.options = options
         self.escape = escape
         self.cursorIndex = 0
         self.optionSelected = Event()
+        self.text = text
 
         super(Menu, self).__init__(surface, width, height, halign, valign)
 
     def _renderContent(self, surface):
+        # Render the text (if any)
+        lines = []
+        if self.text:
+            lines = [self.text] # TODO split long lines into multiple
+            for i, line in enumerate(lines):
+                renderedText = self.font.render(line, 1, self.FONT_COLOR)
+                dest = (self.HMARGIN, self.VMARGIN + i*self.LINE_HEIGHT )
+                surface.blit(renderedText, dest)
+
         # Render the menu cursor
         renderedText = self.font.render(">", 1, self.FONT_COLOR)
-        dest = (self.HMARGIN, self.VMARGIN + self.cursorIndex*self.LINE_HEIGHT)
+        dest = (self.HMARGIN, self.VMARGIN + (len(lines) + self.cursorIndex)*self.LINE_HEIGHT)
         surface.blit(renderedText, dest)
 
         # Render each option.
         leftTextPos = self.HMARGIN + self.CURSOR_MARGIN + renderedText.get_rect().width
         for i, (optionValue, optionText) in enumerate(self.options):
             renderedText = self.font.render(optionText, 1, self.FONT_COLOR)
-            dest = (leftTextPos, self.VMARGIN + i*self.LINE_HEIGHT )
+            dest = (leftTextPos, self.VMARGIN + (len(lines) + i)*self.LINE_HEIGHT )
             surface.blit(renderedText, dest)
 
     def handleEvent(self, event):
@@ -35,7 +45,7 @@ class Menu(BaseWindow):
             elif(event.key == pygame.K_UP):
                 self.moveCursorUp()
 
-            elif(event.key == pygame.K_RETURN):
+            elif(event.key in [pygame.K_RETURN, pygame.K_SPACE]):
                 self.optionSelected.fire(self.getCurrentOption())
 
             elif(event.key == pygame.K_ESCAPE):
