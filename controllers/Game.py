@@ -6,6 +6,7 @@ from models.Map import Map
 from models.Mob import Direction
 from gui.Hud import Hud
 from gui.Inventory import Inventory
+from gui.Menu import Menu
 
 class Game(BaseController):
     BACKGROUND_COLOR = (255,255,255)
@@ -18,11 +19,10 @@ class Game(BaseController):
         self.maps = {}
         self.setMap('test')
 
-        print(self.currentMap)
-
         self.spriteList = pygame.sprite.RenderPlain([self.player,])
         self.hud = Hud(self.background)
         self.inventory = Inventory(self.background)
+        self.menu = None
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)
@@ -30,6 +30,9 @@ class Game(BaseController):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit = True
+
+            elif self.menu:
+                self.menu.handleEvent(event)
 
             elif event.type == pygame.KEYDOWN:
                 if(event.key == pygame.K_z):
@@ -55,6 +58,17 @@ class Game(BaseController):
 
                 elif(event.key == pygame.K_SPACE):
                     self.player.interact(self.currentMap)
+
+                elif(event.key == pygame.K_ESCAPE):
+                    options = [
+                        ('quit', 'Quit'),
+                        ('cancel', 'Cancel'),
+                    ]
+                    self.menu = Menu(options, self.background, escape="cancel")
+                    self.menu.optionSelected.handle(self.handleMenuSelection)
+
+        if self.menu:
+            return
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
@@ -90,6 +104,9 @@ class Game(BaseController):
             self.hud.render()
             self.inventory.render()
 
+            if self.menu:
+                self.menu.render()
+
             self.screen.blit(self.background, (0,0))
 
 
@@ -99,4 +116,11 @@ class Game(BaseController):
             return self.nextController
 
         return None
+
+    def handleMenuSelection(self, option):
+        if option == 'cancel':
+            self.menu = False
+
+        elif option == 'quit':
+            self.quit = True
 

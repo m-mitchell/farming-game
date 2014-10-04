@@ -1,14 +1,16 @@
 import pygame
 from gui.BaseWindow import BaseWindow, HALIGN_CENTER, VALIGN_CENTER, SIZE_AUTO
 import models.Config as config
+from util.Event import Event
 
 class Menu(BaseWindow):
     CURSOR_MARGIN = 5
 
-    def __init__(self, options, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER):
+    def __init__(self, options, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER, escape=None):
         self.options = options
+        self.escape = escape
         self.cursorIndex = 0
-
+        self.optionSelected = Event()
 
         super(Menu, self).__init__(surface, width, height, halign, valign)
 
@@ -24,6 +26,21 @@ class Menu(BaseWindow):
             renderedText = self.font.render(optionText, 1, self.FONT_COLOR)
             dest = (leftTextPos, self.VMARGIN + i*self.LINE_HEIGHT )
             surface.blit(renderedText, dest)
+
+    def handleEvent(self, event):
+        if event.type == pygame.KEYDOWN:
+            if(event.key == pygame.K_DOWN):
+                self.moveCursorDown()
+
+            elif(event.key == pygame.K_UP):
+                self.moveCursorUp()
+
+            elif(event.key == pygame.K_RETURN):
+                self.optionSelected.fire(self.getCurrentOption())
+
+            elif(event.key == pygame.K_ESCAPE):
+                if self.escape:
+                    self.optionSelected.fire(self.escape)
 
     def setCursor(self, index):
         self.cursorIndex = index

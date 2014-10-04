@@ -15,6 +15,7 @@ class MainMenu(BaseController):
             ('quit', 'Quit')
         ]
         self.menu = Menu(options, self.background)
+        self.menu.optionSelected.handle(self.handleMenuSelection)
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)
@@ -22,15 +23,8 @@ class MainMenu(BaseController):
             if event.type == pygame.QUIT:
                 self.quit = True
 
-            elif event.type == pygame.KEYDOWN:
-                if(event.key == pygame.K_DOWN):
-                    self.menu.moveCursorDown()
-
-                elif(event.key == pygame.K_UP):
-                    self.menu.moveCursorUp()
-
-                elif(event.key == pygame.K_RETURN):
-                    self.handleMenuSelection(self.menu.getCurrentOption())
+            else:
+                self.menu.handleEvent(event)
 
 
     def handleMenuSelection(self, option):
