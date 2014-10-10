@@ -14,8 +14,7 @@ class MainMenu(BaseController):
             ('start', 'Start'),
             ('quit', 'Quit')
         ]
-        self.menu = Menu(options, self.background)
-        self.menu.optionSelected.handle(self.handleMenuSelection)
+        self.menu = Menu(options, self.background, handler=self.handleMenuSelection)
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)

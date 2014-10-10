@@ -60,6 +60,9 @@ class BaseWindow(object):
     def setSurface(self, surface):
         self._parentSurface = surface
 
+    def handleEvent(self, event):
+        pass
+
     def render(self):
         # Figure out the size of the content surface.
         # If we're autosizing, we use the parent surface size to give the content some space to blit on.

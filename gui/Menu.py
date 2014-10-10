@@ -6,7 +6,7 @@ from util.Event import Event
 class Menu(BaseWindow):
     CURSOR_MARGIN = 5
 
-    def __init__(self, options, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER, escape=None, text=None):
+    def __init__(self, options, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER, escape=None, text=None, handler=None):
         self.options = options
         self.escape = escape
         self.cursorIndex = 0
@@ -14,6 +14,9 @@ class Menu(BaseWindow):
         self.text = text
 
         super(Menu, self).__init__(surface, width, height, halign, valign)
+
+        if handler:
+            self.optionSelected.handle(handler)
 
     def _renderContent(self, surface):
         # Render the text (if any)

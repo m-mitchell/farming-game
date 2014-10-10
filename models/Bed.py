@@ -21,13 +21,13 @@ class Bed(Sprite):
             ('no', 'No'),
         ]
         text = "Are you sure you want to sleep?"
-        menu = Menu(options, None, escape="no", text=text)
-        getController().setMenu(menu, self.handleMenuSelection)
+        menu = Menu(options, None, escape="no", text=text, handler=self.handleMenuSelection)
+        getController().setGui(menu)
 
     def handleMenuSelection(self, option):
         if option == 'yes':
             self.__sleep()
-        getController().setMenu(None)
+        getController().setGui(None)
 
     def __sleep(self):
         gameTime = GameTime.Instance()

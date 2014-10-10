@@ -22,7 +22,7 @@ class Game(BaseController):
         self.spriteList = pygame.sprite.RenderPlain([self.player,])
         self.hud = Hud(self.background)
         self.inventory = Inventory(self.background)
-        self.menu = None
+        self.gui = None
 
     def tick(self):
         self.clock.tick(self.TICK_TIME)
@@ -31,8 +31,8 @@ class Game(BaseController):
             if event.type == pygame.QUIT:
                 self.quit = True
 
-            elif self.menu:
-                self.menu.handleEvent(event)
+            elif self.gui:
+                self.gui.handleEvent(event)
 
             elif event.type == pygame.KEYDOWN:
                 if(event.key == pygame.K_z):
@@ -64,10 +64,10 @@ class Game(BaseController):
                         ('quit', 'Quit'),
                         ('cancel', 'Cancel'),
                     ]
-                    menu = Menu(options, self.background, escape="cancel")
-                    self.setMenu(menu, self.handleMenuSelection)
+                    menu = Menu(options, self.background, escape="cancel", handler=self.handleMenuSelection)
+                    self.setGui(menu)
 
-        if self.menu:
+        if self.gui:
             return
 
         keys = pygame.key.get_pressed()
@@ -91,11 +91,10 @@ class Game(BaseController):
 
         self.currentMap = self.maps[mapName]
 
-    def setMenu(self, menu, handler=None):
-        self.menu = menu
-        if menu:
-            self.menu.optionSelected.handle(handler)
-            self.menu.setSurface(self.background)
+    def setGui(self, gui):
+        self.gui = gui
+        if gui:
+            self.gui.setSurface(self.background)
 
     def run(self):
         while not self.quit and not self.nextController:
@@ -110,8 +109,8 @@ class Game(BaseController):
             self.hud.render()
             self.inventory.render()
 
-            if self.menu:
-                self.menu.render()
+            if self.gui:
+                self.gui.render()
 
             self.screen.blit(self.background, (0,0))
 
@@ -125,7 +124,7 @@ class Game(BaseController):
 
     def handleMenuSelection(self, option):
         if option == 'cancel':
-            self.menu = False
+            self.setGui(None)
 
         elif option == 'quit':
             self.quit = True

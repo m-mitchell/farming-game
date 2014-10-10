@@ -74,6 +74,7 @@
     <property name="targetY" value="3"/>
    </properties>
   </object>
+  <object name="Sign" type="Sign" x="192" y="96" width="32" height="32"/>
  </objectgroup>
  <layer name="overhead" width="20" height="15">
   <properties>
