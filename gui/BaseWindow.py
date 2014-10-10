@@ -42,14 +42,14 @@ class BaseWindow(object):
     def _loadTiles(self):
         # Figure out the height and width of the sheet (in sprites)
         spritesheetRect = self._spritesheet.get_rect()
-        sheetWidthInTiles = floor(spritesheetRect.width / config.TILE_SIZE)
-        sheetHeightInTiles = floor(spritesheetRect.height / config.TILE_SIZE)
+        sheetWidthInTiles = floor(spritesheetRect.width / config.GUI_TILE_SIZE)
+        sheetHeightInTiles = floor(spritesheetRect.height / config.GUI_TILE_SIZE)
 
         self._tiles = []
         for y in range(0, sheetHeightInTiles):
             row = []
             for x in range(0, sheetWidthInTiles):
-                rect = pygame.Rect(x*config.TILE_SIZE, y*config.TILE_SIZE, config.TILE_SIZE, config.TILE_SIZE)
+                rect = pygame.Rect(x*config.GUI_TILE_SIZE, y*config.GUI_TILE_SIZE, config.GUI_TILE_SIZE, config.GUI_TILE_SIZE)
                 sprite = self._spritesheet.subsurface(rect)
                 row.append(sprite)
             self._tiles.append(row)
@@ -97,11 +97,11 @@ class BaseWindow(object):
 
         # Snap the window size so it's evenly divisible by the tile size.
         # This lets us make tileable (patterned) window gfx and still have them be pretty ^o^
-        if width % config.TILE_SIZE != 0:
-            width = (int(width/config.TILE_SIZE) + 1) * config.TILE_SIZE
+        if width % config.GUI_TILE_SIZE != 0:
+            width = (int(width/config.GUI_TILE_SIZE) + 1) * config.GUI_TILE_SIZE
 
-        if height % config.TILE_SIZE != 0:
-            height = (int(height/config.TILE_SIZE) + 1) * config.TILE_SIZE
+        if height % config.GUI_TILE_SIZE != 0:
+            height = (int(height/config.GUI_TILE_SIZE) + 1) * config.GUI_TILE_SIZE
 
         # Figure out the left for the window surface
         left = 0
@@ -126,34 +126,34 @@ class BaseWindow(object):
         self.surface.blit(self._tiles[0][0], (0, 0))
 
         # Top-right corner
-        self.surface.blit(self._tiles[0][2], (width-config.TILE_SIZE, 0))
+        self.surface.blit(self._tiles[0][2], (width-config.GUI_TILE_SIZE, 0))
 
         # Bottom-left corner
-        self.surface.blit(self._tiles[2][0], (0, height-config.TILE_SIZE))
+        self.surface.blit(self._tiles[2][0], (0, height-config.GUI_TILE_SIZE))
 
         # Bottom-right corner
-        self.surface.blit(self._tiles[2][2], (width-config.TILE_SIZE, height-config.TILE_SIZE))
+        self.surface.blit(self._tiles[2][2], (width-config.GUI_TILE_SIZE, height-config.GUI_TILE_SIZE))
 
         # Top edge
-        for i in range(1, int(width/config.TILE_SIZE)-1):
-            self.surface.blit(self._tiles[0][1], (config.TILE_SIZE*i, 0))
+        for i in range(1, int(width/config.GUI_TILE_SIZE)-1):
+            self.surface.blit(self._tiles[0][1], (config.GUI_TILE_SIZE*i, 0))
 
         # Bottom edge
-        for i in range(1, int(width/config.TILE_SIZE)-1):
-            self.surface.blit(self._tiles[2][1], (config.TILE_SIZE*i, height-config.TILE_SIZE))
+        for i in range(1, int(width/config.GUI_TILE_SIZE)-1):
+            self.surface.blit(self._tiles[2][1], (config.GUI_TILE_SIZE*i, height-config.GUI_TILE_SIZE))
 
         # Left edge
-        for i in range(1, int(height/config.TILE_SIZE)-1):
-            self.surface.blit(self._tiles[1][0], (0, config.TILE_SIZE*i))
+        for i in range(1, int(height/config.GUI_TILE_SIZE)-1):
+            self.surface.blit(self._tiles[1][0], (0, config.GUI_TILE_SIZE*i))
 
         # Right edge
-        for i in range(1, int(height/config.TILE_SIZE)-1):
-            self.surface.blit(self._tiles[1][2], (width-config.TILE_SIZE, config.TILE_SIZE*i))
+        for i in range(1, int(height/config.GUI_TILE_SIZE)-1):
+            self.surface.blit(self._tiles[1][2], (width-config.GUI_TILE_SIZE, config.GUI_TILE_SIZE*i))
 
         # THE MIDDLE BIT!
-        for i in range(1, int(width/config.TILE_SIZE)-1):
-            for j in range(1, int(height/config.TILE_SIZE)-1):
-                self.surface.blit(self._tiles[1][1], (config.TILE_SIZE*i, config.TILE_SIZE*j))
+        for i in range(1, int(width/config.GUI_TILE_SIZE)-1):
+            for j in range(1, int(height/config.GUI_TILE_SIZE)-1):
+                self.surface.blit(self._tiles[1][1], (config.GUI_TILE_SIZE*i, config.GUI_TILE_SIZE*j))
 
         # Add the content surface, then blit onto the main surface
         self.surface.blit(contentSurface, (0, 0))
