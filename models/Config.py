@@ -3,8 +3,9 @@ Config
 
 This represents the project config.
 """
+import os, sys
 
-PROJECT_ROOT = r"D:\Documents\farmingGame"
+PROJECT_ROOT = os.path.abspath(os.path.join(__file__, "../../"))
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
