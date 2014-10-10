@@ -23,7 +23,7 @@ class BaseWindow(object):
     HMARGIN = 20
     VMARGIN = 10
 
-    def __init__(self, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_LEFT, valign=VALIGN_TOP, image="default"):
+    def __init__(self, surface=None, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_LEFT, valign=VALIGN_TOP, image="default"):
         self._parentSurface = surface
         self.width = width
         self.height = height
@@ -64,6 +64,9 @@ class BaseWindow(object):
         pass
 
     def render(self):
+        if not self._parentSurface:
+            return 
+
         # Figure out the size of the content surface.
         # If we're autosizing, we use the parent surface size to give the content some space to blit on.
         # We'll crop the surface after.

@@ -6,7 +6,7 @@ from util.Event import Event
 class Menu(BaseWindow):
     CURSOR_MARGIN = 5
 
-    def __init__(self, options, surface, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER, escape=None, text=None, handler=None):
+    def __init__(self, options, surface=None, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_CENTER, valign=VALIGN_CENTER, escape=None, text=None, handler=None):
         self.options = options
         self.escape = escape
         self.cursorIndex = 0
