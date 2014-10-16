@@ -50,7 +50,8 @@ class Plot(Sprite):
             self.harvest()
 
     def water(self):
-        self._watered = True
+        if self._plowed:
+            self._watered = True
 
     def clear(self):
         self._crop = None
