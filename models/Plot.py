@@ -122,8 +122,6 @@ class Plot(Sprite):
     def _updateImage(self):
         super(Plot, self)._updateImage()
 
-        #print(self.image)
-
         # If we have a crop, we have to superimpose it on top of the plot tile.
         if self._crop:
             # Figure out which sprite we should use.
@@ -138,7 +136,7 @@ class Plot(Sprite):
 
             # Create a temp surface and blit the plot and crop onto it.
             # If we blit the crop directly on the plot it seems to get stuck there forever ;(
-            temp = pygame.Surface((self.width, self.height))
+            temp = pygame.Surface((self.width, self.height), flags=pygame.SRCALPHA)
             temp.blit(self.image, (0,0))
             temp.blit(cropImage, (0,0))
             self.image = temp

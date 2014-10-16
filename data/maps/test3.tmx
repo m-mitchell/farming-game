@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="ground" tilewidth="32" tileheight="32">
-  <image source="../../media/images/tiles/ground.png" width="96" height="32"/>
+  <image source="../../media/images/tiles/ground.png" width="160" height="288"/>
  </tileset>
  <layer name="ground" width="20" height="15">
   <properties>
@@ -11,12 +11,17 @@
    eJxjZGBgYBzFo3gUj+IhgAHGRgEt
   </data>
  </layer>
+ <layer name="ground deco" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUgIA8ECtS0TxNINamonmjgIEBANwQAJU=
+  </data>
+ </layer>
  <layer name="collision" width="20" height="15">
   <properties>
    <property name="z-index" value="10"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYKIyphZAN48adqGbh88+Us0jR55U+yk1j5IwxKee2uYhqyHXPFz+J9c8ZDFa+ZcUMFTMoyYGAL4/ALc=
+   eJxjY2BgYKcS5gJiUQbqAX4qm8cwyM0TobJ5kqPmjZo3wOZJMVCvfJEDYgAv4QNa
   </data>
  </layer>
  <objectgroup name="objects" width="20" height="15">
@@ -34,7 +39,10 @@
     <property name="targetY" value="3"/>
    </properties>
   </object>
-  <object name="Plot" type="Plot" x="512" y="160" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="512" y="288" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="480" y="288" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="480" y="320" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="512" y="320" width="32" height="32"/>
  </objectgroup>
  <layer name="overhead" width="20" height="15">
   <properties>

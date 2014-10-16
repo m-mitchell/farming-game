@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="ground" tilewidth="32" tileheight="32">
-  <image source="../../media/images/tiles/ground.png" width="96" height="32"/>
+  <image source="../../media/images/tiles/ground.png" width="160" height="288"/>
  </tileset>
  <layer name="ground" width="20" height="15">
   <properties>
@@ -11,40 +11,45 @@
    eJxjZGBgYBzFo3gUj+IhgAHGRgEt
   </data>
  </layer>
+ <layer name="ground deco" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj6QB6IFdCwIgXmqQCxKhpWG0TmaQKxFhrWpsC8UTAKhgoAAMCVA3k=
+  </data>
+ </layer>
  <layer name="collision" width="20" height="15">
   <properties>
    <property name="z-index" value="10"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYmBgYELCMMBEAaYWoKZZtDKP2v4dNW/UvOFmHjUxABkPAH0=
+   eJxjY2BgYIdiDgYE4EQSJxZzATE3A/WAJBXNopV5AlQ2T3TUvFHzhpF5UkAsTSUsB8QARBUEvw==
   </data>
  </layer>
  <objectgroup name="objects" width="20" height="15">
   <object name="Bed" type="Bed" x="64" y="160" width="32" height="64"/>
-  <object name="Plot" type="Plot" x="288" y="32" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="320" y="32" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="352" y="32" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="384" y="32" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="416" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="288" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="320" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="352" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="384" y="64" width="32" height="32"/>
   <object name="Plot" type="Plot" x="416" y="64" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="448" y="32" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="416" y="96" width="32" height="32"/>
   <object name="Plot" type="Plot" x="448" y="64" width="32" height="32"/>
   <object name="Plot" type="Plot" x="448" y="96" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="416" y="96" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="384" y="96" width="32" height="32"/>
   <object name="Plot" type="Plot" x="448" y="128" width="32" height="32"/>
   <object name="Plot" type="Plot" x="416" y="128" width="32" height="32"/>
   <object name="Plot" type="Plot" x="384" y="128" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="352" y="128" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="384" y="64" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="352" y="64" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="448" y="160" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="416" y="160" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="384" y="160" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="352" y="160" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="384" y="96" width="32" height="32"/>
   <object name="Plot" type="Plot" x="352" y="96" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="352" y="128" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="320" y="160" width="32" height="32"/>
   <object name="Plot" type="Plot" x="320" y="128" width="32" height="32"/>
   <object name="Plot" type="Plot" x="320" y="96" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="320" y="64" width="32" height="32"/>
-  <object name="Plot" type="Plot" x="288" y="64" width="32" height="32"/>
   <object name="Plot" type="Plot" x="288" y="96" width="32" height="32"/>
   <object name="Plot" type="Plot" x="288" y="128" width="32" height="32"/>
+  <object name="Plot" type="Plot" x="288" y="160" width="32" height="32"/>
   <object name="ShippingBin" type="ShippingBin" x="288" y="224" width="64" height="64"/>
   <object name="Teleport" type="Teleport" x="128" y="0" width="32" height="32">
    <properties>
