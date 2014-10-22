@@ -1,0 +1,7 @@
+ {
+		"internalName": "potatoSeed",
+		"displayName": "Potato Seeds",
+		"crop": "potato",
+		"shipPrice": 5,
+		"buyPrice": 10
+}

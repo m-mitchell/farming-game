@@ -1,10 +1,10 @@
 {
-	"internalName": "strawberry",
-	"displayName": "Strawberry",
+	"internalName": "watermelon",
+	"displayName": "Watermelon",
 
-	"growTime": 10,
+	"growTime": 3,
 	"regrows": true,
-	"regrowTime": 5,
+	"regrowTime": 1,
 	"seasons": {
 		"spring": "normal",
 		"summer": "normal",
@@ -12,9 +12,9 @@
 		"winter": "none"
 	},
 
-	"spriteChanges" : [ 1, 4, 8, 10 ],
+	"spriteChanges" : [ 3 ],
 
-	"seed": "strawberrySeed",
+	"seed": "watermelonSeed",
 
 	"shipPrice": 30,
 	"buyPrice": 300,

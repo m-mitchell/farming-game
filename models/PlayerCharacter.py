@@ -28,13 +28,9 @@ class PlayerCharacter(Mob):
 
         self.rucksack.add(Tool("wateringCan"))
         self.rucksack.add(Tool("hoe"))
+        self.rucksack.add(Seed("watermelonSeed"))
         self.rucksack.add(Seed("strawberrySeed"))
-        self.rucksack.add(Seed("strawberrySeed"))
-        self.rucksack.add(Seed("strawberrySeed"))
-        self.rucksack.add(Seed("strawberrySeed"))
-        self.rucksack.add(Seed("turnipSeed"))
-        self.rucksack.add(Seed("turnipSeed"))
-        self.rucksack.add(Seed("turnipSeed"))
+        self.rucksack.add(Seed("potatoSeed"))
         self.rucksack.add(Seed("turnipSeed"))
 
     def nextTool(self):

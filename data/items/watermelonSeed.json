@@ -1,0 +1,7 @@
+{
+		"internalName": "watermelonSeed",
+		"displayName": "Watermelon Seeds",
+		"crop": "watermelon",
+		"shipPrice": 5,
+		"buyPrice": 20
+}

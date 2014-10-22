@@ -1,8 +1,8 @@
 {
-	"internalName": "turnip",
-	"displayName": "Turnip",
+	"internalName": "potato",
+	"displayName": "Potato",
 
-	"growTime": 5,
+	"growTime": 2,
 	"regrows": false,
 	"seasons": {
 		"spring": "normal",
@@ -11,9 +11,9 @@
 		"winter": "none"
 	},
 
-	"spriteChanges" : [ 5 ],
+	"spriteChanges" : [ 1 ],
 
-	"seed": "turnipSeed",
+	"seed": "potatoSeed",
 
 	"shipPrice": 30,
 	"buyPrice": 300,
