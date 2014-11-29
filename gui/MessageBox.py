@@ -1,5 +1,5 @@
 import pygame
-from gui.BaseWindow import BaseWindow, HALIGN_CENTER, VALIGN_BOTTOM, SIZE_AUTO
+from gui.BaseWindow import BaseWindow, HALIGN_CENTER, VALIGN_BOTTOM, SIZE_STRETCH
 import models.Config as config
 from util.Event import Event
 from controllers.BaseController import getController
@@ -10,7 +10,7 @@ class MessageBox(BaseWindow):
         self.text = text
         self.done = Event()
 
-        super(MessageBox, self).__init__(surface, halign=halign, valign=valign, width=config.SCREEN_WIDTH)
+        super(MessageBox, self).__init__(surface, halign=halign, valign=valign, width=SIZE_STRETCH)
 
         if handler == None:
             handler = self._defaultHandler
@@ -21,7 +21,7 @@ class MessageBox(BaseWindow):
         # Render the text (if any)
         lines = []
         if self.text:
-            lines = [self.text] # TODO split long lines into multiple
+            lines = self.text.split("\n") # TODO split long lines into multiple
             for i, line in enumerate(lines):
                 renderedText = self.font.render(line, 1, self.FONT_COLOR)
                 dest = (self.HMARGIN, self.VMARGIN + i*self.LINE_HEIGHT )

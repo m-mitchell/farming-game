@@ -14,6 +14,7 @@ VALIGN_CENTER = 1
 VALIGN_BOTTOM = 2
 
 SIZE_AUTO = "auto"
+SIZE_STRETCH = "stretch"
 
 class BaseWindow(object):
     FONT_SIZE = 18
@@ -22,6 +23,7 @@ class BaseWindow(object):
     LINE_HEIGHT = FONT_SIZE * 1.2
     HMARGIN = 20
     VMARGIN = 10
+    BORDER_MARGIN = config.GUI_TILE_SIZE/2
 
     def __init__(self, surface=None, width=SIZE_AUTO, height=SIZE_AUTO, halign=HALIGN_LEFT, valign=VALIGN_TOP, image="default"):
         self._parentSurface = surface
@@ -31,6 +33,12 @@ class BaseWindow(object):
         self.valign = valign
         self._contentHeight = 0
         self._contentWidth = 0
+
+        if self.width == SIZE_STRETCH:
+            self.width = config.SCREEN_WIDTH - (self.BORDER_MARGIN) * 2
+
+        if self.height == SIZE_STRETCH:
+            self.height = config.SCREEN_HEIGHT - (self.BORDER_MARGIN) * 2
 
         filename = r'%s\media\images\gui\%s.png' % (config.PROJECT_ROOT, image)
         self._spritesheet = pygame.image.load(filename)
@@ -107,17 +115,17 @@ class BaseWindow(object):
             height = (int(height/config.GUI_TILE_SIZE) + 1) * config.GUI_TILE_SIZE
 
         # Figure out the left for the window surface
-        left = 0
+        left = self.BORDER_MARGIN
         if self.halign == HALIGN_RIGHT:
-            left = parentRect.width - width
+            left = parentRect.width - width - self.BORDER_MARGIN
 
         elif self.halign == HALIGN_CENTER:
             left = parentRect.width/2 - width/2
 
         # Figure out the top for the window surface
-        top = 0
+        top = self.BORDER_MARGIN
         if self.valign == VALIGN_BOTTOM:
-            top = parentRect.height - height
+            top = parentRect.height - height - self.BORDER_MARGIN
 
         elif self.valign == VALIGN_CENTER:
             top = parentRect.height/2 - height/2
