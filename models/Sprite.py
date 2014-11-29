@@ -25,6 +25,7 @@ class Sprite(pygame.sprite.Sprite):
         self._animIndex = None
         self._animSpeed = speed
         self._animTimer = speed
+        self._spriteOffset = (0,0)
 
         filename = r'%s\media\images\sprites\%s.png' % (config.PROJECT_ROOT, sprite)
         self._spritesheet = pygame.image.load(filename)
@@ -82,12 +83,12 @@ class Sprite(pygame.sprite.Sprite):
         if not hasattr(self,'rect'):
             self.rect = self.image.get_rect()
 
-        self.rect.x = self.pos[0] * config.TILE_SIZE
+        self.rect.x = self.pos[0] * config.TILE_SIZE + self._spriteOffset[0]
 
         # We want the bottom of the sprite to touch the bottom of the tile.
         # So we need to offset the rectangle by the height difference between the sprite and tile.
         heightDifference = (self.height - config.TILE_SIZE)
-        self.rect.y = (self.pos[1] * config.TILE_SIZE) - heightDifference
+        self.rect.y = (self.pos[1] * config.TILE_SIZE) - heightDifference + self._spriteOffset[1]
 
     def _getCoordinates(self, coordinates, direction):
         """

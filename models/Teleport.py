@@ -20,4 +20,4 @@ class Teleport(Sprite):
 
     def walkTrigger(self):
         getController().setMap(self._target)
-        getPlayer().pos = (int(self._targetX), int(self._targetY))
+        getPlayer().teleport(self._targetX, self._targetY)
