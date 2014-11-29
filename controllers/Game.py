@@ -19,7 +19,6 @@ class Game(BaseController):
         self.maps = {}
         self.setMap('test')
 
-        self.spriteList = pygame.sprite.RenderPlain([self.player,])
         self.hud = Hud(self.background)
         self.inventory = Inventory(self.background)
         self.gui = None
@@ -54,10 +53,10 @@ class Game(BaseController):
                     self.player.unequipItem()
 
                 elif(event.key == pygame.K_LCTRL):
-                    self.player.useTool(self.currentMap)
+                    self.player.spawnUseTool(self.currentMap)
 
                 elif(event.key == pygame.K_SPACE):
-                    self.player.interact(self.currentMap)
+                    self.player.spawnInteract(self.currentMap)
 
                 elif(event.key == pygame.K_ESCAPE):
                     options = [
@@ -83,7 +82,7 @@ class Game(BaseController):
         elif keys[pygame.K_DOWN]:
             self.player.move(self.currentMap, Direction.DOWN)
 
-        self.player.walkTrigger(self.currentMap)
+        self.player.spawnWalkTrigger(self.currentMap)
 
     def setMap(self, mapName):
         if mapName not in self.maps.keys():
@@ -102,9 +101,6 @@ class Game(BaseController):
 
             self.background.fill(self.BACKGROUND_COLOR)
             self.currentMap.render()
-
-            self.spriteList.update()
-            self.spriteList.draw(self.background)
 
             self.hud.render()
             self.inventory.render()

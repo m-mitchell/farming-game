@@ -98,15 +98,15 @@ class PlayerCharacter(Mob):
     def unequipItem(self):
         self.currentItem = None
 
-    def interact(self, map):
+    def spawnInteract(self, map):
         targetPos = self._getCoordinates(self.pos, self._direction)
         map.interact(self.currentItem, *targetPos)
 
-    def useTool(self, map):
+    def spawnUseTool(self, map):
         targetPos = self._getCoordinates(self.pos, self._direction)
 
         if self.currentTool:
             map.useTool(self.currentTool, *targetPos)
 
-    def walkTrigger(self, map):
+    def spawnWalkTrigger(self, map):
         map.walkTrigger(*self.pos)

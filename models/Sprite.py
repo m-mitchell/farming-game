@@ -44,7 +44,6 @@ class Sprite(pygame.sprite.Sprite):
     def interact(self, heldItem):
         return False
 
-
     def walkTrigger(self):
         return False
 

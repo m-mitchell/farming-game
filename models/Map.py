@@ -10,6 +10,7 @@ from pytmx import *
 from pytmx.tmxloader import load_pygame
 import os
 import models.Config as config
+from models.PlayerCharacter import getPlayer
 
 class Map(object):
     def __init__(self, surface, internalName):
@@ -22,6 +23,7 @@ class Map(object):
         self._bgColor = None
         self._layers = []
         self._objects = pygame.sprite.RenderPlain()
+        self._mobs = pygame.sprite.RenderPlain([getPlayer(),])
         self.loadMap()
 
 
@@ -31,10 +33,18 @@ class Map(object):
             temp.fill(self._bgColor)
 
         for layer in self._layers:
-            temp = layer.render(temp)
+            if layer._name != 'overhead':
+                temp = layer.render(temp)
 
         self._objects.update()
         self._objects.draw(temp)
+
+        self._mobs.update()
+        self._mobs.draw(temp)
+
+        for layer in self._layers:
+            if layer._name == 'overhead':
+                temp = layer.render(temp)
 
         self._surface.blit(temp, (0,0))
 
